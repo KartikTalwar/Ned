@@ -6,4 +6,4 @@
 *.save
 config.js
 /node_modules
-/plugins/tagged
+/plugins/private
