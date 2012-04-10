@@ -22,17 +22,15 @@ var onMessage = function(channel, frm, msg, x)
     var message          = tempMessage
 
     var resp  = [
-  "http://dribbble.com/system/users/3737/screenshots/154046/ship-it.png?1309034836",
-  "http://troll.me/images/bush/looks-good-to-me-ship-it.jpg",
-  "http://images.cheezburger.com/completestore/2011/11/2/aa83c0c4-2123-4bd3-8097-966c9461b30c.jpg",
-  "http://images.cheezburger.com/completestore/2011/11/2/46e81db3-bead-4e2e-a157-8edd0339192f.jpg",
-
-  ]
+                 "http://i42.tinypic.com/qnlgf9.png",
+                 "http://i43.tinypic.com/33nuebq.jpg",
+                 "http://i41.tinypic.com/2crrgis.jpg",
+                 "http://i39.tinypic.com/1fu0c6.jpg"
+                ]
     
-    var rand  = Math.floor(Math.random()*11);
     var words = message.split(' ').length
 
-    if(rand == 7 || rand == 3 )
+    if(Util.triggersRandom([3, 7]))
     {
         self.message(channel, resp[Math.floor(Math.random()*resp.length)]);
     }

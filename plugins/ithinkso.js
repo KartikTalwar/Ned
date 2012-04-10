@@ -22,11 +22,11 @@ var onMessage = function(channel, frm, msg, x)
     var message          = tempMessage
 
     var resp  = ['I definitely agree with you', 'Hmm I see your point', 'Yes, of course', 'I think so too', 'You are correct', 'You are definitely right', 'My computations confirm that as well', 'Hmm.. you sure about that?', 'My calculations dictate otherwise'];
-    
-    var rand  = Math.floor(Math.random()*11);
+
+
     var words = message.split(' ').length
 
-    if((rand == 0 || rand == 4) && words > 2)
+    if(Util.triggersRandom([0, 4]) && words > 2)
     {
         self.message(channel, resp[Math.floor(Math.random()*resp.length)]);
     }

@@ -35,10 +35,9 @@ var onMessage = function(channel, frm, msg, x)
   "http://www.japemonster.com/wp-content/uploads/2011/08/demotivational-posters-like-a-boss.jpg",
   ]
     
-    var rand  = Math.floor(Math.random()*11);
     var words = message.split(' ').length
 
-    if(rand == 7 || rand == 3)
+    if(Util.triggersRandom([7, 3]))
     {
         self.message(channel, resp[Math.floor(Math.random()*resp.length)]);
     }

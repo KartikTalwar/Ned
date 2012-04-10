@@ -22,9 +22,8 @@ var onMessage = function(channel, frm, msg, x)
     var message          = tempMessage
 
     var resp  = Util.chooseRandom(jeff);
-    var rand  = Math.floor(Math.random()*11);
 
-    if(rand == 3 || rand == 7 || rand == 2)
+    if(Util.triggersRandom([3, 7, 2]))
     {
         self.message(channel, resp);
     }

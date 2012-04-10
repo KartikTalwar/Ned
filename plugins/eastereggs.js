@@ -25,10 +25,9 @@ var onMessage = function(channel, frm, msg, x)
 
     var resp  = []
     
-    var rand  = Math.floor(Math.random()*11);
     var words = message.split(' ').length
 
-    if(rand == 7 || rand == 3)
+    if(Util.triggersRandom([3, 7]))
     {
         self.message(channel, resp[Math.floor(Math.random()*resp.length)]);
     }

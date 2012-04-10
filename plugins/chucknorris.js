@@ -21,12 +21,11 @@ var onMessage = function(channel, frm, msg, x)
     var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
     var message          = tempMessage
 
-    var rand  = Math.floor(Math.random()*11);
     var joke  = chuck_facts[Math.floor(Math.random()*chuck_facts.length)];
     
     if(message.indexOf('chuck') != -1 && message.indexOf('norris') == -1)
     {
-        if(rand == 7)
+        if(Util.triggersRandom([7]))
         {
             self.message(channel, joke);
         }

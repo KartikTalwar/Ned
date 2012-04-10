@@ -23,10 +23,9 @@ var onMessage = function(channel, frm, msg, x)
 
     var resp  = ['http://media.tumblr.com/tumblr_lrzrlymUZA1qbliwr.gif', 'http://3deadmonkeys.com/gallery3/var/albums/random_stuff/Carlton-Dance-GIF.gif'];
     
-    var rand  = Math.floor(Math.random()*11);
     var words = message.split(' ').length
 
-    if(rand == 7 && words > 2)
+    if(Util.triggersRandom([7]) && words > 2)
     {
         if(message.indexOf('happy') != -1)
         {

@@ -22,10 +22,9 @@ var onMessage = function(channel, frm, msg, x)
     var message          = tempMessage
 
     var resp  = "That's what she said!";
-    var rand  = Math.floor(Math.random()*11);
     var words = message.split(' ').length
 
-    if((rand == 3 || rand == 7) && words > 2)
+    if(Util.triggersRandom([3, 7]) && words > 2)
     {
         self.message(channel, resp);
     }

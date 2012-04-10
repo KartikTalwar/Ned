@@ -33,10 +33,10 @@ var onMessage = function(channel, frm, msg, x)
 , "http://icanhasinternets.com/wp-content/uploads/2010/05/haters5.jpg"
 ]
     
-    var rand  = Math.floor(Math.random()*11);
+
     var words = message.split(' ').length
 
-    if(rand == 7 || rand == 3)
+    if(Util.triggersRandom([3, 7]))
     {
         self.message(channel, resp[Math.floor(Math.random()*resp.length)]);
     }
