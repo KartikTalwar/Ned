@@ -1,5 +1,4 @@
 
-var http = require('http');
 var requests = require('request');
 
 var trigger = ['9gag'];

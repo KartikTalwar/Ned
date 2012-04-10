@@ -1,9 +1,4 @@
 
-var http = require('http');
-
-
-
-
 var trigger = ['remind me in', 'remind me to'];
 /*var help    = [{
                usage       : 'map of OR locate', 

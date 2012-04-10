@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['googleimage','img me', 'google image', 'img '];
 var help    = [{
                usage       : 'img OR googleimage', 

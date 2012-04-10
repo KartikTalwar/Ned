@@ -1,7 +1,5 @@
 
-
 var trigger = ['sudo '];
-
 
 module.exports.load = function(bot) 
 {

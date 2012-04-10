@@ -1,5 +1,4 @@
 
-
 module.exports.load = function(bot) 
 {
     var assembleInput = /.*([Jj]eff [Dd]ean).*/;

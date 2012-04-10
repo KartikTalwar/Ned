@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['weather', 'the weather', 'whats the weather', 'conditions for', 'current weather', 'current temperature'];
 var help    = [{
                usage       : 'weather',

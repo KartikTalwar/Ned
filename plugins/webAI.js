@@ -1,5 +1,3 @@
-var http = require('http');
-
 
 module.exports.load = function(bot) 
 {

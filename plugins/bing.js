@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['google ','search '];
 var help    = [{
                usage       : 'google', 

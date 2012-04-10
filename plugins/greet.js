@@ -1,11 +1,5 @@
 
-var http = require('http');
-
-
-
 var trigger = ['hi', 'hello', 'hey', 'whatsup', 'yo ', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup'];
-
-
 
 
 module.exports.load = function(bot) 

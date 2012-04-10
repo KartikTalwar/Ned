@@ -1,5 +1,4 @@
 
-
 module.exports.load = function(bot) 
 {
     var assembleInput = /.*(big|small|long|hard|soft|mouth|face|fast|slow|in there|on there|in that|on that|wet|dry|on the|in the|suck|blow|jaw|all in|fit that|fit it|hurts|hot|huge|balls|stuck)$/;

@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['define', 'definition of'];
 var help    = [{
                usage       : 'define OR definition of', 

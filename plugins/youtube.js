@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['yt', 'youtube', 'utube', 'watch', 'video of'];
 var help    = [{
                usage       : 'yt OR youtube', 

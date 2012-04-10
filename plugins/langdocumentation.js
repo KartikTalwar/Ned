@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['doc ', 'docs '];
 var help    = [{
                usage       : 'doc [langname]', 

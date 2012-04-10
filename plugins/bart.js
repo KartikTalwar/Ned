@@ -1,6 +1,4 @@
 
-var http = require('http');
-
 var trigger = ['bart '];
 var help    = [{
                usage       : 'bart OR bart from', 

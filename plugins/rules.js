@@ -1,5 +1,4 @@
 
-
 module.exports.load = function(bot) 
 {
     var assembleInput = /(what are )?the (three |3 )?(rules|laws)$/;

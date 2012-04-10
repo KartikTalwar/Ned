@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['wikipedia','w '];
 var help    = [{
                usage       : 'wikipedia', 

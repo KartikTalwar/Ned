@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['mustachify ', 'moustachify'];
 var help    = [{
                usage       : 'mustachify', 

@@ -1,6 +1,3 @@
-    
-var http = require('http');
-
 
 var trigger = ['hipchat emoticon', 'hipchat smilie', 'hipchat meme'];
 var help    = [{

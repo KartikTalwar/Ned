@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['lmgtfy ', 'lmbtfy ', 'lmytfy ', 'lmddgtfy ', 'lmdtfy '];
 var help    = [{
                usage       : 'lmgtfy', 

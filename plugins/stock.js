@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['stocks ', 'stock'];
 var help    = [{
                usage       : 'stock', 

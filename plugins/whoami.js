@@ -1,8 +1,4 @@
 
-var http = require('http');
-
-
-
 module.exports.load = function(bot) 
 {
     var assembleInput = "(when are you|where are you|whoami|who are you|your creator|who created you|.*turing.*test|why are you)";

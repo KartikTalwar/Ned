@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['insult'];
 var help    = [{
                usage       : 'insult', 

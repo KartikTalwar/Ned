@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['compute', 'calculate', 'calc', 'math', 'convert'];
 var help    = [{
                usage       : 'calc OR calculate', 

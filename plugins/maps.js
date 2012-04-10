@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['map of', 'map for', 'locate', 'directions to', 'map me', 'map '];
 var help    = [{
                usage       : 'map of OR locate', 

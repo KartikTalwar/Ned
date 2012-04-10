@@ -1,8 +1,4 @@
 
-var http = require('http');
-
-
-
 var trigger = ['whats the time', 'the time', 'what is the current time', 'tell me the time', 'what time is it', 'what time it is', 'time', 'current time', 'date', 'whats the date', 'todays date'];
 var help    = [{
                usage       : 'time OR whats the time', 

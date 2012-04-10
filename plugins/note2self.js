@@ -1,5 +1,4 @@
 
-
 var trigger = ['note 2 self ','note2self', 'note to self', 'n2s', 'my notes', 'delete note', 'del note', 'to do', 'todo'];
 var help    = [{
                usage       : 'n2s OR note to self', 

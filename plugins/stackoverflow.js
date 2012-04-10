@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['stackoverflow','so '];
 var help    = [{
                usage       : 'stackoverflow OR so', 

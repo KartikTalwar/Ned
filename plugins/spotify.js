@@ -1,7 +1,4 @@
 
-var http = require('http');
-
-
 var trigger = ['spot me', 'spot ', 'spotify', 'sp '];
 var help    = [{
                usage       : 'spot me OR spotify me OR sp', 
