@@ -1,0 +1,9 @@
+*~
+*.log
+*.txt
+*.swp
+*.mem
+*.save
+config.js
+/node_modules
+/plugins/tagged
