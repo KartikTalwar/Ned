@@ -40,7 +40,7 @@ var onMessage = function(channel, frm, msg, x)
     {
         var greetings = ["Alright", "Okay", "Fine"];
     
-        message = Util.str_replace([' me ', ' my ', ' mine ', ' us ', ' yourself '], [' you ', ' your ', ' yours ', ' you guys ', ' myself '], message+" ");
+        message = Util.str_replace([' me ', ' my ', ' mine ', ' us ', ' yourself ', ' our '], [' you ', ' your ', ' yours ', ' you guys ', ' myself ', ' your '], message+" ");
         self.message(channel, greetings[Math.floor(Math.random()*greetings.length)]+ ". I'll " + message || "Alright. I'll do whatever you need");
     }
 

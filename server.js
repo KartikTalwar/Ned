@@ -31,12 +31,29 @@ NedBot.connect();
 NedBot.onConnect(function() 
 {
     Util.consoleLog('Connected');
+    connected = this;
 
-    for (var i = 0; i < Config.rooms.length; i++) 
+    if(Config.joinAllRooms)
     {
-        Util.consoleLog('Joining: ' + Config.rooms[i].toString().split('@')[0]);
-        this.join(Config.rooms[i]);
+        this.getRooms(function(err, items, stanza)
+        {
+            for(var i=0; i<items.length; i++)
+            {
+                var roomName = items[i]["jid"];
+                Util.consoleLog('Joining: ' + roomName.toString().split('@')[0]);
+                connected.join(roomName);
+            }
+        });
     }
+    else
+    {
+        for (var i = 0; i < Config.roomsToJoin.length; i++) 
+        {
+            Util.consoleLog('Joining: ' + Config.roomsToJoin[i].toString().split('@')[0]);
+            connected.join(Config.roomsToJoin[i]);
+        }
+    }
+    
 });
 
 
@@ -47,18 +64,34 @@ NedBot.onInvite(function(roomJid, fromJid, reason)
     Util.consoleLog('Joining: ' + roomJid.toString().split('@')[0]);
 
     this.join(roomJid);
+
+    this.getRoster(function(err, roster, stanza)
+    {
+        var from  = fromJid["user"]+"@"+fromJid["domain"];
+        var group = roomJid["user"]+"@"+roomJid["domain"];
+        
+        for(var i=0; i<roster.length; i++)
+        {
+            var toCompare = roster[i]["jid"];
+            if(from == toCompare)
+            {
+                var user = roster[i]["name"].toString().split(' ')[0];
+                NedBot.message(group, "Thank you for the invite " + user);
+                
+                break;
+            }
+        }
+    });
 });
 
 
 
 NedBot.onDisconnect(function() 
 {
-    var self = this;
-
     var reconnect = setTimeout(function() 
     {
         Util.consoleLog('Reconnecting');
-        self.connect();
+        this.connect();
     }, Config.reconnectWaitMs);
 
     Util.consoleLog('Disconnected');
@@ -69,6 +102,13 @@ NedBot.onDisconnect(function()
 NedBot.onError(function(message, stanza) 
 {
     Util.consoleLog('Error: ' + message);
+    Util.consoleLog('Disconnected');
+
+    var reconnect = setTimeout(function()
+    {
+        Util.consoleLog('Reconnecting');
+        this.connect();
+    }, Config.reconnectWaitMs/10);
 });
 
 
