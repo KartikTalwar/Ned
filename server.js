@@ -31,7 +31,7 @@ NedBot.connect();
 NedBot.onConnect(function() 
 {
     Util.consoleLog('Connected');
-    connected = this;
+    self = this;
 
     if(Config.joinAllRooms)
     {
@@ -41,7 +41,11 @@ NedBot.onConnect(function()
             {
                 var roomName = items[i]["jid"];
                 Util.consoleLog('Joining: ' + roomName.toString().split('@')[0]);
-                connected.join(roomName);
+                
+                if(!in_array(roomName, Config.roomsNotToJoin))
+                {
+                    self.join(roomName);
+                }
             }
         });
     }
@@ -50,10 +54,9 @@ NedBot.onConnect(function()
         for (var i = 0; i < Config.roomsToJoin.length; i++) 
         {
             Util.consoleLog('Joining: ' + Config.roomsToJoin[i].toString().split('@')[0]);
-            connected.join(Config.roomsToJoin[i]);
+            self.join(Config.roomsToJoin[i]);
         }
     }
-    
 });
 
 
@@ -63,21 +66,22 @@ NedBot.onInvite(function(roomJid, fromJid, reason)
     Util.consoleLog('Invited: ' + roomJid.toString().split('@')[0]);
     Util.consoleLog('Joining: ' + roomJid.toString().split('@')[0]);
 
-    this.join(roomJid);
+    self = this;
+    self.join(roomJid);
 
-    this.getRoster(function(err, roster, stanza)
+    self.getRoster(function(err, roster, stanza)
     {
         var from  = fromJid["user"]+"@"+fromJid["domain"];
         var group = roomJid["user"]+"@"+roomJid["domain"];
-        
+
         for(var i=0; i<roster.length; i++)
         {
             var toCompare = roster[i]["jid"];
             if(from == toCompare)
             {
                 var user = roster[i]["name"].toString().split(' ')[0];
-                NedBot.message(group, "Thank you for the invite " + user);
-                
+                self.message(group, "Thank you for the invite " + user + "!");
+
                 break;
             }
         }
@@ -108,7 +112,7 @@ NedBot.onError(function(message, stanza)
     {
         Util.consoleLog('Reconnecting');
         this.connect();
-    }, Config.reconnectWaitMs/10);
+    }, Config.reconnectWaitMs);
 });
 
 
