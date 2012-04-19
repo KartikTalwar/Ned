@@ -56,7 +56,7 @@ var onMessage = function(channel, frm, msg, x)
             {
                 host: "ajax.googleapis.com",
                 port: 80,
-                path: "/ajax/services/search/images?v=1.0&rsz=8&q=" + Util.padd(input)
+                path: "/ajax/services/search/images?v=1.0&rsz=8&safe=active&q=" + Util.padd(input)
             };
 
             http.get(httpRequestParams, function(res) 
@@ -74,7 +74,7 @@ var onMessage = function(channel, frm, msg, x)
                             j = j["responseData"]["results"];
 
                         
-                        self.message(channel, j[0]["url"]);
+                        self.message(channel, j[1]["url"]);
                         //self.message(channel, "Maximum threshold reached. You n00bs have been banned. Please try again later.");
                         
 
