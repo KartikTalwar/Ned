@@ -1,8 +1,8 @@
 
-var trigger = ['googleimage','img me', 'google image', 'img '];
+var trigger = ['groupon deal',"today's groupon", 'todays groupon'];
 var help    = [{
-               usage       : 'img OR googleimage', 
-               description : 'Returns image from google' // sorry, Bing is what I meant
+               usage       : 'groupon deal OR todays groupon', 
+               description : 'Returns todays groupon deal'
               }];
 module.exports.help = help
 
@@ -47,53 +47,48 @@ var onMessage = function(channel, frm, msg, x)
     else
     {
         var input = Util.padd(message);
+        var city  = "san-francisco"
 
         // Actual function begins here
         
-        if(input.length > 0)
+        var httpRequestParams = 
         {
-            var httpRequestParams = 
-            {
-                host: "ajax.googleapis.com",
-                port: 80,
-                path: "/ajax/services/search/images?v=1.0&rsz=8&q=" + Util.padd(input)
-            };
+            host: "api.groupon.com",
+            port: 80,
+            path: "/v2/deals?client_id=" + Config.groupon_key
+        };
 
-            http.get(httpRequestParams, function(res) 
-            {
-                var data = '';
-                res.on('data', function(chunk) {
-                    data += chunk;
-                });
-                
-                res.on('end', function(chunk) 
-                {
-                    try 
-                    {
-                        var j = JSON.parse(data);
-                            j = j["responseData"]["results"];
 
-                        
-                        self.message(channel, j[0]["url"]);
-                        //self.message(channel, "Maximum threshold reached. You n00bs have been banned. Please try again later.");
-                        
-
-                    }
-                    catch(err)
-                    {
-                        self.message(channel, "(facepalm) Error");
-                    }
-                });
+        http.get(httpRequestParams, function(res) 
+        {
+            var data = '';
+            res.on('data', function(chunk) {
+                data += chunk;
             });
             
-            
-            // actual function ends here
+            res.on('end', function(chunk) 
+            {
+                try 
+                {
+                    var j = JSON.parse(data);
+                    var title = j.deals[0].title;
+                    var price = j.deals[0].options[0].price.formattedAmount;
+                    var image = j.deals[0].grid6ImageUrl;
 
-        }
-        else
-        {
-            self.message(channel, Util.errorMessage() + "Please check your input");
-        }
+                    self.message(channel, title + "  [" + price + "]");
+                    self.message(channel, image);
+
+                }
+                catch(err)
+                {
+                    self.message(channel, "(facepalm) Error");
+                }
+            });
+        });
+        
+        
+        // actual function ends here
+
 
 }
 

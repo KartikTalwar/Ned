@@ -23,7 +23,7 @@ var onMessage = function(channel, frm, msg, x)
 
     var resp  = Util.chooseRandom(jeff);
 
-    if(Util.triggersRandom([3, 7, 2]))
+    if(Util.triggersRandom([3, 7, 2, 0, 5]))
     {
         self.message(channel, resp);
     }
