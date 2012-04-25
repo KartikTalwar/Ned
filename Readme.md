@@ -6,6 +6,11 @@
 #### Ned is an XMPP bot, build on top of `wobot` that adds useful features like doing web searches, todo lists, weather information and much more to HipChat and allows you to have access to external data without the trouble of leaving your chat window.
 
 
+**Why is it called Ned?**
+
+Because, Skynet was taken.
+
+
 ## Installation
 
 ### Dependencies
@@ -63,6 +68,47 @@ $ node server.js
 ```sh
 $ node server.js | tee log.txt
 ```
+
+
+## Plugin Development
+
+
+**Here is the template for a plugin**
+
+Place the plugin inside the `/plugins` directory and it will automatically be included
+
+
+```js
+var plugin = {
+              name        : 'greet',    // must be unique
+              trigger     : ['hi', 'hello'],    // prefix ned
+          //  trigger     : "([Nn]ed (hi|hello|yo).*)$",    // can also use regex
+              enabled     : 'true',    // plugin can be inactive
+              description : 'Greets a user',
+              usage       : 'ned hi'
+             };
+
+module.exports.plugin = plugin;
+
+module.exports[plugin.name] = function(get)
+{
+
+    /* Available Data: */
+
+    // get.message
+    // get.from
+    // get.firstName
+    // get.roomName
+    // get.fullMessage
+    // get.isPrivate
+
+    var response = "Hello, " + get.fistName + "from " + get.roomName;
+    sendMessage(response);
+    
+    return true;
+}
+```
+
 
 ## Authors
 
