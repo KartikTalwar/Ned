@@ -9,13 +9,17 @@ var plugin = {
 
 module.exports.plugin = plugin;
 
-module.exports[plugin.name] = function(params)
+module.exports[plugin.name] = function(get)
 {
 
     var images = ["http://bbh-labs.com/wp-content/uploads/2012/03/t2_600.gif",
-                 "http://img.tgdaily.com/sites/default/files/stock/article_images/misc/skynetrobot.jpg"
+                  "http://i49.tinypic.com/ea5yk0.gif",
+                  "http://i49.tinypic.com/ea5yk0.gif",
+                  "http://i47.tinypic.com/4lsj2r.jpg"
                 ];
 
 
     sendMessage(Util.chooseRandom(images));
+    
+    return true;
 }
