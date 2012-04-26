@@ -1,103 +1,54 @@
+var plugin = {
+              name        : 'googleimages',
+              trigger     : ['googleimage','img me', 'google image', 'img'],
+              enabled     : 'true',
+              fuzzy       : 'true',
+              description : 'Gets the first google image result',
+              usage       : 'ned img nyan cat'
+             };
 
-var trigger = ['googleimage','img me', 'google image', 'img '];
-var help    = [{
-               usage       : 'img OR googleimage', 
-               description : 'Returns image from google' // sorry, Bing is what I meant
-              }];
-module.exports.help = help
+module.exports.plugin = plugin;
 
-
-
-module.exports.load = function(bot) 
+module.exports[plugin.name] = function(get)
 {
-    var assembleInput = "("+trigger.join("|")+")";    
-    var callerRegEx   = new RegExp(Util.NedCaller.source + Util.NedName.source   + " " + assembleInput + "(.*)$", "i");
-    var pmCallerRegEx = new RegExp(Util.NedCaller.source + Util.NedPMName.source + ""  + assembleInput + "(.*)$", "i");
-
-    bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
-};
-
-
-var onMessage = function(channel, frm, msg, x) 
-{
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var tempMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
-
-    var caller           = /^([\@\!\#\$\~\%\/\\/]*)?/;
-    var ned              = (isPrivateMessage && isSingleWord) ? 
-                           /([Nn][Ee][Dd][Dd]?([Dd]?[Aa][Rr][Dd])?(( *[^A-Za-z0-9]* *))?)?$/ :
-                           /([Nn][Ee][Dd][Dd]?([Dd]?[Aa][Rr][Dd])?(( *[^A-Za-z0-9]* *))? ?)?/; 
-
-    var assembleInput    = "("+trigger.join("|")+")";
-    var regEx            = new RegExp(caller.source + ned.source + assembleInput, "i");
-    var message          = tempMessage.replace(regEx, '');
-    var isEmpty          = (message.split(' ').join('').length == 0 || message.length == 0) ? true : false;
-    var isPrivate        = (isPrivateMessage) ? 1 : 0;
-    var message          = Util.clarify(message.split("+").join("%2B"));
-
-    if(isEmpty)
+    if(get.isEmpty)
     {
-        self.message(channel, Util.errorMessage() + "Please check your input");
+        sendMessage(Util.errorMessage() + "Please check your input");
     }
     else
     {
-        var input = Util.padd(message);
+        var input = Util.padd(get.message);
 
-        // Actual function begins here
-        
-        if(input.length > 0)
+        var httpRequestParams = 
         {
-            var httpRequestParams = 
+            host : "ajax.googleapis.com",
+            port : 80,
+            path : "/ajax/services/search/images?v=1.0&rsz=8&safe=active&q=" + input
+        };
+
+        http.get(httpRequestParams, function(res) 
+        {
+            var data = '';
+
+            res.on('data', function(chunk) 
             {
-                host: "ajax.googleapis.com",
-                port: 80,
-                path: "/ajax/services/search/images?v=1.0&rsz=8&safe=active&q=" + Util.padd(input)
-            };
-
-            http.get(httpRequestParams, function(res) 
-            {
-                var data = '';
-                res.on('data', function(chunk) {
-                    data += chunk;
-                });
-                
-                res.on('end', function(chunk) 
-                {
-                    try 
-                    {
-                        var j = JSON.parse(data);
-                            j = j["responseData"]["results"];
-
-                        
-                        self.message(channel, j[1]["url"]);
-                        //self.message(channel, "Maximum threshold reached. You n00bs have been banned. Please try again later.");
-                        
-
-                    }
-                    catch(err)
-                    {
-                        self.message(channel, "(facepalm) Error");
-                    }
-                });
+                data += chunk;
             });
-            
-            
-            // actual function ends here
 
-        }
-        else
-        {
-            self.message(channel, Util.errorMessage() + "Please check your input");
-        }
-
-}
+            res.on('end', function(chunk) 
+            {
+                try 
+                {
+                    var resp = JSON.parse(data)["responseData"]["results"];
+                    sendMessage(resp[1]["url"]);
+                }
+                catch(err)
+                {
+                    sendMessage("(facepalm) Error");
+                }
+            });
+        });
+    }
 
     return true;
-};
-
-
+}
