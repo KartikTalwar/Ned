@@ -80,12 +80,13 @@ Place the plugin inside the `/plugins` directory and it will automatically be in
 
 ```js
 var plugin = {
-              name        : 'greet',    // must be unique
-              trigger     : ['hi', 'hello'],    // prefix ned
+              name        : 'greet',                        // must be unique
+              trigger     : ['hi', 'hello'],                // prefix ned
           //  trigger     : "([Nn]ed (hi|hello|yo).*)$",    // can also use regex
-              enabled     : 'true',    // plugin can be inactive
-              description : 'Greets a user',
-              usage       : 'ned hi'
+              enabled     : 'true',                         // plugin can be inactive
+              fuzzy       : 'fuzzy',                        // autocorrect mispelled trigger
+              description : 'Greets a user',                // about the plugin
+              usage       : 'ned hi'                        // usage example
              };
 
 module.exports.plugin = plugin;
@@ -101,6 +102,7 @@ module.exports[plugin.name] = function(get)
     // get.roomName
     // get.fullMessage
     // get.isPrivate
+    // get.isEmpty
 
     var response = "Hello, " + get.fistName + "from " + get.roomName;
     sendMessage(response);
