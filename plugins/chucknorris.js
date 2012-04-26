@@ -1,45 +1,17 @@
+var plugin = {
+              name        : 'chucknorris',
+              trigger     : ".*([Cc]huck [Nn]orris|[Nn]orris|tell me( a)? [Cc]huck).*$",
+              enabled     : 'true',
+              fuzzy       : 'false',
+              description : 'Tells a Chuck Norris fact',
+              usage       : 'ned hi'
+             };
 
-module.exports.load = function(bot) 
+module.exports.plugin = plugin;
+
+module.exports[plugin.name] = function(get)
 {
-    var assembleInput = /.*(chuck norris|norris|tell me( a)? chuck|chuck).*/;
-    var callerRegEx   = new RegExp(assembleInput.source, "i");
-    var pmCallerRegEx = new RegExp(assembleInput.source, "i");
-
-    bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
-};
-
-
-var onMessage = function(channel, frm, msg, x) 
-{
-
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var tempMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
-    var message          = tempMessage
-
-    var joke  = chuck_facts[Math.floor(Math.random()*chuck_facts.length)];
-    
-    if(message.indexOf('chuck') != -1 && message.indexOf('norris') == -1)
-    {
-        if(Util.triggersRandom([7]))
-        {
-            self.message(channel, joke);
-        }
-    }
-    else
-    {
-        self.message(channel, joke);
-    }
-
-
-    return true;
-};
-
-    chuck_facts = [
+    var chuck_facts = [
         "Chuck Norris' tears cure cancer. Too bad he has never cried. Ever.",
         "Chuck Norris does not sleep. He waits.",
         "Chuck Norris is currently suing NBC, claiming Law and Order are trademarked names for his left and right legs.",
@@ -443,3 +415,9 @@ var onMessage = function(channel, frm, msg, x)
         "Chuck Norris doesn't have blood. He is filled with magma.",
     ];
 
+    var fact  = Util.chooseRandom(chuck_facts); // not joke. fact!
+
+    sendMessage(fact);
+
+    return true;
+}
