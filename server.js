@@ -7,6 +7,7 @@ Brain   = require('./lib/brain');
 http    = require('http');
 
 
+
 var wobot = require('wobot');
 
 NedBot = new wobot.Bot(
@@ -107,11 +108,12 @@ NedBot.onError(function(message, stanza)
 {
     Util.consoleLog('Error: ' + message);
     Util.consoleLog('Disconnected');
+    self = this;
 
     var reconnect = setTimeout(function()
     {
         Util.consoleLog('Reconnecting');
-        this.connect();
+        self.connect();
     }, Config.reconnectWaitMs);
 });
 

@@ -2,6 +2,7 @@ var plugin = {
               name        : 'skynet',
               trigger     : "([Nn]ed .+[Ss]kynet.*)$",
               enabled     : 'true',
+              fuzzy       : 'false',
               general     : 'true',
               description : '',
               usage       : ''

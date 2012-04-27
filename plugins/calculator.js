@@ -70,6 +70,5 @@ module.exports[plugin.name] = function(get)
 
     }
 
-
     return true;
 }

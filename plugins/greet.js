@@ -1,7 +1,8 @@
 var plugin = {
               name        : 'greet',
-              trigger     : ['hi', 'hello', 'hey', 'whatsup', 'yo ', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup', 'whatsup', ],
+              trigger     : ['hi', 'hello', 'hey', 'whatsup', 'yo', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup', 'whatsup'],
               enabled     : 'true',
+              fuzzy       : 'false',
               description : '',
               usage       : ''
              };
@@ -15,11 +16,11 @@ module.exports[plugin.name] = function(get)
     var greetings = ['excellent', 'superb', 'wonderful'];
 
 
-    if( Util.it_has(get.message, 'it goin') || Util.it_has(get.message, 'you ') )
+    if(Util.it_has(get.fullMessage, 'it goin') || Util.it_has(get.fullMessage, 'e you'))
     {
         sendMessage(generic + ", I'm " + Util.chooseRandom(greetings) + ", fine thank you");
     }
-    else if(Util.it_has(get.message, 'dawg') || Util.it_has(get.message, 'dog') )
+    else if(Util.it_has(get.fullMessage, 'dawg') || Util.it_has(get.fullMessage, 'dog'))
     {
         sendMessage("Yo Dawg");
     }
@@ -28,5 +29,5 @@ module.exports[plugin.name] = function(get)
         sendMessage(generic);
     }
 
+    return true;
 }
-

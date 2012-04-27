@@ -84,7 +84,7 @@ var plugin = {
               trigger     : ['hi', 'hello'],                // prefix ned
           //  trigger     : "([Nn]ed (hi|hello|yo).*)$",    // can also use regex
               enabled     : 'true',                         // plugin can be inactive
-              fuzzy       : 'fuzzy',                        // autocorrect mispelled trigger
+              fuzzy       : 'true',                         // autocorrect mispelled trigger
               description : 'Greets a user',                // about the plugin
               usage       : 'ned hi'                        // usage example
              };
