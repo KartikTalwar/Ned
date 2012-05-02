@@ -1,6 +1,6 @@
 var plugin = {
-              name        : 'slowclap',
-              trigger     : ".*([Cc]lap|[Ss]low.*[Cc]lap|[Cc]lap.*[Ss]slow.*)$",
+              name        : 'woodchuck',
+              trigger     : "[Nn]ed.*wood.*woodchuck.*chuck.*wood.*chuck.*$",
               enabled     : 'true',
               fuzzy       : 'false',
               description : '',
@@ -11,9 +11,7 @@ module.exports.plugin = plugin;
 
 module.exports[plugin.name] = function(get)
 {
-    var resp  = ['http://i42.tinypic.com/2lbm538.gif', 'http://i43.tinypic.com/2z5w5s4.jpg'];
-
-    sendMessage(Util.chooseRandom(resp));
+    sendMessage("A woodchuck would chuck all the wood he could chuck if a woodchuck could chuck wood");
 
     return true;
 }

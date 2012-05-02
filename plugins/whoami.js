@@ -1,52 +1,42 @@
+var plugin = {
+              name        : 'whoami',
+              trigger     : "[Nn]ed ([Ww]hen are you|[Ww]here are you|[Ww]hoami|[Ww]ho are you|.*ho.*your creator.*|[Ww]ho created you|.*[Tt]uring.*test|[Ww]hy are you)",
+              enabled     : 'true',
+              fuzzy       : 'false',
+              description : '',
+              usage       : ''
+             };
 
-module.exports.load = function(bot) 
+module.exports.plugin = plugin;
+
+module.exports[plugin.name] = function(get)
 {
-    var assembleInput = "(when are you|where are you|whoami|who are you|your creator|who created you|.*turing.*test|why are you)";
-    var callerRegEx   = new RegExp(Util.NedCaller.source + Util.NedName.source   + " " + assembleInput + "(.*)$", "i");
-    var pmCallerRegEx = new RegExp(Util.NedCaller.source + Util.NedPMName.source + ""  + assembleInput + "(.*)$", "i");
+    var resp = "(jackie) " + get.firstName +  ", I'm here to help you, not try to trick you into thinking I'm something I'm not!";
 
-    bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
-};
-
-
-var onMessage = function(channel, frm, msg, x) 
-{
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var tempMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
-    var message          = tempMessage;
-    var resp = "(jackie) " + from.split(' ')[0] +  ", I'm here to help you, not try to trick you into thinking I'm something I'm not!";
-
-    if(message.indexOf('ring') != -1)
+    if(Util.it_has(get.message, 'ring t'))
     {
-        self.message(channel, resp);
+        sendMessage(resp);
     }
-    else if (message.indexOf('your') != -1 || message.indexOf('who a') != -1)
+    else if(Util.it_has(get.message, 'your') || Util.it_has(get.message, 'who a'))
     {
-        self.message(channel, 'I am Ned. Its short for Ned');
+        sendMessage('I am Ned. Its short for Ned');
     }
-    else if(message.indexOf('why are you') != -1)
+    else if(Util.it_has(get.message, 'hy are you'))
     {
-        self.message(channel, "I just am.");
+        sendMessage('I just am.');
     }
-    else if(message.indexOf('when are you') != -1)
+    else if(Util.it_has(get.message, 'hen are you'))
     {
-        self.message(channel, "Now is when I am");
+        sendMessage('Now is when I am');
     }
-    else if(message.indexOf('where are you') != -1)
+    else if(Util.it_has(get.message, 'here are you'))
     {
-        self.message(channel, "In the Matrix, just like you are");
+        sendMessage('In the Matrix, just like you are');
     }
     else
     {
-        self.message(channel, "My creator is that intern Kartik.");
+        sendMessage('My creator is Kartik Talwar');
     }
     
     return true;
-};
-
-
+}

@@ -1,27 +1,16 @@
+var plugin = {
+              name        : 'ronswanson',
+              trigger     : ".*([Rr]on .*[Ss]wanson).*$",
+              enabled     : 'true',
+              fuzzy       : 'false',
+              description : '',
+              usage       : ''
+             };
 
+module.exports.plugin = plugin;
 
-module.exports.load = function(bot) 
+module.exports[plugin.name] = function(get)
 {
-    var assembleInput = /.*([Rr]on .*[Ss]wanson).*$/;
-    var callerRegEx   = new RegExp(assembleInput.source, "i");
-    var pmCallerRegEx = new RegExp(assembleInput.source, "i");
-
-    bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
-};
-
-
-var onMessage = function(channel, frm, msg, x) 
-{
-
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var tempMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
-    var message          = tempMessage
-
     var resp  = [
                   "http://i.imgur.com/kW0f7.jpg",
                   "http://i.imgur.com/vw9gZ.jpg",
@@ -44,11 +33,7 @@ var onMessage = function(channel, frm, msg, x)
                   "http://i.imgur.com/9hhkx.jpg"
                ];
 
-    self.message(channel, Util.chooseRandom(resp));
-
-
-
+    sendMessage(Util.chooseRandom(resp));
 
     return true;
-};
-
+}
