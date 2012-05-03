@@ -146,7 +146,10 @@ var onMessage = function(channel, frm, msg, x)
         }
         else
         {
-            sendMessage(Util.greet());
+            if(params.message.length == 0)
+            {
+                sendMessage(Util.greet());
+            }
         }
 
     });
