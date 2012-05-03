@@ -1,38 +1,17 @@
+var plugin = {
+              name        : 'jeffdean',
+              trigger     : ".*([Jj]eff [Dd]ean).*",
+              enabled     : 'true',
+              fuzzy       : 'false',
+              description : '',
+              usage       : ''
+             };
 
-module.exports.load = function(bot) 
+module.exports.plugin = plugin;
+
+module.exports[plugin.name] = function(get)
 {
-    var assembleInput = /.*([Jj]eff [Dd]ean).*/;
-    var callerRegEx   = new RegExp(assembleInput.source, "i");
-    var pmCallerRegEx = new RegExp(assembleInput.source, "i");
-
-    bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
-};
-
-
-var onMessage = function(channel, frm, msg, x) 
-{
-
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var tempMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
-    var message          = tempMessage
-
-    var resp  = Util.chooseRandom(jeff);
-
-    if(Util.triggersRandom([3, 7, 2, 0, 5]))
-    {
-        self.message(channel, resp);
-    }
-
-    return true;
-};
-
-
-var jeff = [
+    var jeff = [
 	  "During his own Google interview, Jeff Dean was asked the  implications if P=NP were true.  He said, \"P = 0 or N = 1.\" Then, before  the interviewer had even finished laughing, Jeff examined Google’s  public certificate and wrote the private key on the whiteboard.",
 	  "Compilers don’t warn Jeff Dean. Jeff Dean warns compilers.",
 	  "The rate at which Jeff Dean produces code jumped by a factor of 40  in late 2000 when he upgraded his keyboard to USB 2.0.",
@@ -53,6 +32,12 @@ var jeff = [
 	  "Jeff Dean wrote a genetic algorithm. It made awesome things amongst which are BigTable and Peter Norvig.",
 	  "Jeff Dean doesn't kill processes, he slays them.",
 	  "Why did Vint Cerf invent the Internet? Because Jeff Dean didn't have time."
-
 	];
 
+    if(Util.triggersRandom([3, 7, 2, 0, 5]))
+    {
+        sendMessage(Util.chooseRandom(jeff));
+    }
+
+    return true;
+}
