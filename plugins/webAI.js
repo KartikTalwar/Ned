@@ -152,7 +152,7 @@ var onMessage = function(channel, frm, msg, x)
             }
             else
             {
-                var regex = /([Nn][Ee][Dd][Dd]?([Dd]?[Aa][Rr][Dd])?(( *[^A-Za-z0-9]* *))?)? ([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy)$/;
+                var regex = /([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy).*$/;
 
                 if(params.message.match(regex))
                 {
