@@ -144,6 +144,10 @@ var onMessage = function(channel, frm, msg, x)
         {
             plugins[makeSense].run(params);
         }
+        else
+        {
+            sendMessage(Util.greet());
+        }
 
     });
 
