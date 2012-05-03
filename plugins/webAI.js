@@ -57,12 +57,12 @@ var onMessage = function(channel, frm, msg, x)
 
            params  = {
                    'message' : message, 
+                   'fullMessage': tempMessage,                    
                    'from' : from,
-                   'channel' : channel,
-                   'room' : roomName.split('_')[1], 
-                   'fullMessage': tempMessage, 
-                   'isPrivate': isPrivate,
                    'firstName' : firstName,
+                   'channel' : channel,
+                   'room' : roomName.split('_')[1],
+                   'isPrivate': isPrivate,
                    'isEmpty' : ''
                    }      
                    
@@ -71,13 +71,10 @@ var onMessage = function(channel, frm, msg, x)
         {
             var plugin   = files[i];
             var toImport = '.' + plugin.substring(plugin.indexOf('/'));
+            
+            var inc = ['plugins/webAI.js', 'plugins/help.js'];
 
-            
-            var inc = ['plugins/skynet.js', 'plugins/greet.js', 'plugins/bing.js', 'plugins/calculator.js', 'plugins/9gag.js',
-                       'plugins/carlton.js', 'plugins/chucknorris.js', 'plugins/define.js', 'plugins/googleimage.js',
-                       'plugins/spotify.js', 'plugins/youtube.js', 'plugins/weather.js', 'plugins/maps.js', 'plugins/time.js', 'plugins/twss.js', 'plugins/private/diskfailures.js', 'plugins/private/elasticsearch.js', 'plugins/private/foodmenu.js', 'plugins/private/ganglia.js', 'plugins/private/goodmorning.js', 'plugins/private/jira.js', 'plugins/private/wiki.js', 'plugins/simonsays.js', 'plugins/podbaydoors.js', 'plugins/woodchuck.js', 'plugins/haters.js', 'plugins/stock.js', 'plugins/sudo.js', 'plugins/likeaboss.js', 'plugins/shipit.js',  'plugins/rules.js', 'plugins/stackoverflow.js', 'plugins/whoami.js', 'plugins/insult.js', 'plugins/ronswanson.js', 'plugins/slowclap.js', 'plugins/wikipedia.js'];
-            
-            if(Util.in_array(plugin, inc))
+            if(!Util.in_array(plugin, inc))
             {
                 var execute = require(toImport);
                 var name    = execute.plugin.name;
