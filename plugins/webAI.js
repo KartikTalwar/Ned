@@ -1,8 +1,9 @@
 
 module.exports.load = function(bot) 
 {
-    var trigger = /( +|)$/;
-    var callerRegEx = new RegExp(Util.NedCaller.source + Util.NedName.source + trigger.source, "i");
+//
+    var trigger = /(.+)$/;
+    var callerRegEx = new RegExp(trigger.source, "i");
     var pmCallerRegEx = new RegExp(Util.NedCaller.source + Util.NedPMName.source + trigger.source + "(.*)$", "i");
     
     bot.onMessage(callerRegEx, onMessage);
@@ -26,46 +27,126 @@ var onMessage = function(channel, frm, msg, x)
 
     var regEx            = new RegExp(caller.source + ned.source, "i");
     var message          = tempMessage.replace(regEx, '');
-    var isEmpty          = (message.split(' ').join('').length == 0 || message.length == 0) ? true : false;
     var isPrivate        = (isPrivateMessage) ? 1 : 0;
     var message          = message.split("+").join("%2B");
 
-    if(isEmpty)
-    {
-        self.message(channel, Util.greet());
-    }
-    else
-    {
-        var input = message;
-        self.message(channel, Util.greet());
 
-        /*
-        if(input.length > 0)
-        {
-            var httpRequestParams = 
-            {
-                host: "localhost",
-                port: 5000,
-                path: "/?room=" + escape(roomName) + "&from=" + escape(from) + "&message=" + escape(input) + "&private=" + isPrivate
-            };
+    var firstName = '';
+    
+    if(!isPrivate) { firstName = from.split(' ')[0];}
 
-            http.get(httpRequestParams, function(res) 
-            {
-                var data = '';
-                res.on('data', function(chunk) {
-                    data += chunk;
-                });
-                res.on('end', function(chunk) {
-                    self.message(channel, data);
-                });
-            });
-        }
-        else
-        {
-            self.message(channel, Util.greet());
-        }
-        */
+
+    var input = message;
+    
+    print = function(txt) { console.log(txt); }
+
+    sendMessage = function(txt, group)
+    {
+        var ch = (typeof group == 'undefined') ? channel : group;
+        self.message(ch, txt);
+
+        return true;
     }
+
+    Util.getFilesFromDir('plugins', function(err, files)
+    {
+    
+
+        plugins = {};    
+
+
+           params  = {
+                   'message' : message, 
+                   'from' : from,
+                   'channel' : channel,
+                   'room' : roomName.split('_')[1], 
+                   'fullMessage': tempMessage, 
+                   'isPrivate': isPrivate,
+                   'firstName' : firstName,
+                   'isEmpty' : ''
+                   }      
+                   
+                           
+        for(var i=0; i<files.length; i++)
+        {
+            var plugin   = files[i];
+            var toImport = '.' + plugin.substring(plugin.indexOf('/'));
+
+            
+            var inc = ['plugins/skynet.js', 'plugins/greet.js', 'plugins/bing.js', 'plugins/calculator.js', 'plugins/9gag.js',
+                       'plugins/carlton.js', 'plugins/chucknorris.js', 'plugins/define.js', 'plugins/googleimage.js',
+                       'plugins/spotify.js', 'plugins/youtube.js', 'plugins/weather.js', 'plugins/maps.js', 'plugins/time.js', 'plugins/twss.js', 'plugins/private/diskfailures.js', 'plugins/private/elasticsearch.js', 'plugins/private/foodmenu.js', 'plugins/private/ganglia.js', 'plugins/private/goodmorning.js', 'plugins/private/jira.js', 'plugins/private/wiki.js', 'plugins/simonsays.js', 'plugins/podbaydoors.js', 'plugins/woodchuck.js', 'plugins/haters.js', 'plugins/stock.js', 'plugins/sudo.js', 'plugins/likeaboss.js', 'plugins/shipit.js',  'plugins/rules.js', 'plugins/stackoverflow.js', 'plugins/whoami.js', 'plugins/insult.js', 'plugins/ronswanson.js', 'plugins/slowclap.js', 'plugins/wikipedia.js'];
+            
+            if(Util.in_array(plugin, inc))
+            {
+                var execute = require(toImport);
+                var name    = execute.plugin.name;
+                var trigger = execute.plugin.trigger;
+                var enabled = execute.plugin.enabled.toLowerCase();
+                var fuzzy   = execute.plugin.fuzzy;
+                
+                var details = { "name" : name, "trigger" : trigger, "fuzzy" : fuzzy, 'run' : execute[name]};
+                
+                if(enabled == 'true')
+                {
+                    plugins[name] = details;
+                }
+            }
+        }
+        
+        
+        var getTerm = function(msg, list)
+        {
+            var terms = "(" + list.join('|') + ")";
+            var clean = msg.replace(RegExp(caller.source + ned.source + terms, "i"), '');
+
+            return Util.clarify(clean);
+        }
+        
+        var analyze = function(message, tempMessage, plugins)
+        {
+            for(i in plugins)
+            {
+                var id   = i;
+                var det  = plugins[id];
+                var trig = det.trigger;
+                var fuzz = det.fuzzy;
+                
+                if(typeof trig == "object")
+                {
+                    var threshold = (fuzz == "true") ? 0.80 : 0.99; 
+                    var closest = Util.getClosest(message, trig, threshold);
+                    if(closest != null)
+                    {
+                        params.message = getTerm(message, plugins[id].trigger);
+                        params.isEmpty = (params.message.split(' ').join('').length == 0 || params.message.length == 0) ? true : false;
+                        print(id);
+                        print(params)
+                        return id;
+                    }
+                }
+                else
+                {
+                    var regex = new RegExp(trig, 'i');
+                    if(tempMessage.match(regex))
+                    {
+                        return id;
+                    }
+                }
+            }
+            
+            return null;
+        }
+
+        var makeSense = analyze(message, tempMessage, plugins);
+
+        if(makeSense != null)
+        {
+            plugins[makeSense].run(params);
+        }
+
+    });
+
 
 
     return true;
