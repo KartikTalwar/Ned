@@ -3,7 +3,7 @@ var plugin = {
               trigger     : ['google','search'],
               enabled     : 'true',
               fuzzy       : 'false',
-              description : 'Performs web search',
+              description : 'Performs a web search',
               usage       : 'ned google tagged'
              };
 

@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Gets the latest stock quote chart',
-              usage       : 'stock GOOG'
+              usage       : 'ned stock GOOG'
              };
 
 module.exports.plugin = plugin;

@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Says what you want it to say',
-              usage       : 'ned shout lunch is ready --tagged'
+              usage       : 'ned shout lunch is ready --main_room'
              };
 
 module.exports.plugin = plugin;

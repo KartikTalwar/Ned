@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Returns the first youtube video',
-              usage       : 'ned yt nyan cat'
+              usage       : 'ned yt evolution of dance'
              };
 
 module.exports.plugin = plugin;

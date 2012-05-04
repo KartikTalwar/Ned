@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : "Create Note : n2s -text- \n   View Note: my notes \n   Delete Note: del #id ",
-              usage       : 'n2s buy milk'
+              usage       : 'todo buy milk'
              };
 
 module.exports.plugin = plugin;

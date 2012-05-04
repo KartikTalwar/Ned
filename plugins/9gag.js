@@ -16,6 +16,7 @@ module.exports[plugin.name] = function(get)
     try
     {
         var request = require('request');
+
         request('http://9gag.com/random', function (error, response, body) 
         {
             var redr = response.request.uri.href;
@@ -36,7 +37,6 @@ module.exports[plugin.name] = function(get)
             {
                 sendMessage(Util.errorMessage() + "Error");
             }
-            
         })
     }
     catch (err)

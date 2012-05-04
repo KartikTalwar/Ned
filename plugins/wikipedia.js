@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Gives you the wikipedia topic, given a query',
-              usage       : '@ned w albert einstein'
+              usage       : '@ned w Albert Einstein'
              };
 
 module.exports.plugin = plugin;

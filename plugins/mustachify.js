@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Type in mustachify and enter a url with a human face',
-              usage       : ''
+              usage       : 'ned mustachify http://i47.tinypic.com/2u4t16p.jpg'
              };
 
 module.exports.plugin = plugin;

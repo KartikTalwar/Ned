@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'true',
               description : 'Does your math',
-              usage       : 'ned calc calc pi*5+(i^2)'
+              usage       : 'ned calc calc pi*5+(i^2) + sin(42)'
              };
 
 module.exports.plugin = plugin;
@@ -21,9 +21,9 @@ module.exports[plugin.name] = function(get)
 
         var httpRequestParams = 
         {
-            host: "www.google.com",
-            port: 80,
-            path: "/ig/calculator?q=" + input
+            host : "www.google.com",
+            port : 80,
+            path : "/ig/calculator?q=" + input
         };
 
         http.get(httpRequestParams, function(res) 

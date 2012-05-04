@@ -4,7 +4,7 @@ var plugin = {
               enabled     : 'true',
               fuzzy       : 'false',
               description : 'Tells a Chuck Norris fact',
-              usage       : 'ned hi'
+              usage       : 'ned chuck norris'
              };
 
 module.exports.plugin = plugin;
