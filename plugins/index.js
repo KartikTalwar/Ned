@@ -72,7 +72,7 @@ var onMessage = function(channel, frm, msg, x)
             var plugin   = files[i];
             var toImport = '.' + plugin.substring(plugin.indexOf('/'));
             
-            var inc = ['plugins/webAI.js', 'plugins/help.js'];
+            var inc = ['plugins/index.js', 'plugins/help.js'];
 
             if(!Util.in_array(plugin, inc))
             {
