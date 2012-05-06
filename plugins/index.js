@@ -63,7 +63,7 @@ var onMessage = function(channel, frm, msg, x)
             var toImport = '.' + plugin.substring(plugin.indexOf('/'));
             var dontinc  = ['plugins/index.js', 'plugins/help.js'];
 
-            if(!Util.in_array(plugin, dontinc))
+            if(!Util.in_array(plugin, dontinc) && plugin.split('.').pop() == "js" )
             {
                 var execute = require(toImport);
                 var name    = execute.plugin.name;
