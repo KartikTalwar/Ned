@@ -1,81 +1,59 @@
+// NOTE: HipChat XMPP details such as the jid and channels to join can be obtained
+// from https://www.hipchat.com/account/xmpp
 
-// Can be obtained from https://www.hipchat.com/account/xmpp
+var conf_server         = 'conf.hipchat.com';
+var chat_server         = 'chat.hipchat.com';
+var user_email          = 'nedbot@mysite.com';  // just for reference
 
-var conf_server     = 'conf.hipchat.com';
-var chat_server     = 'chat.hipchat.com';
-
-exports.user_id     = '00_12345';
-exports.password    = '';
-exports.name        = 'Ned Bot'; // this must match the actual name as set on hipchat.com
+exports.user_id         = '0000_123456';
+exports.password        = '';
+exports.name            = 'Ned Bot'; // this must match the actual name as set on hipchat.com
 
 
-// HipChat Rooms to Join (can be found from the lobby tab)
-exports.rooms  = [
-    'devs',
-    'interns',
-    'engineering',
+// channels for the bot to join upon connect and alerts configuration
+exports.roomsToJoin  = [
+    'botz',
     'all_employees'
 ];
 
 
+// Only bother editing this if you will be setting joinAllRooms below to true
+exports.roomsNotToJoin = [
+    'super_duper_secret_room'
+];
+
+
+exports.admins = ['123456', '123456'];
+
+
 exports.printToConsole  = true;   // print logging to stdout
 exports.debugXMPP       = false;  // print XMPP protocol dump for debug (very verbose)
-exports.reconnectWaitMs = 300;    // time before reconnect attempt (5 mins)
-exports.bing_api_key    = '';     // bing.com api key
-exports.bart_key        = '';     // california BART api key
-exports.dictionary_key  = '';     // abbreviations.com api key
+exports.joinAllRooms    = false;
+exports.reconnectWaitMs = 10000; // time before reconnect attempt
+exports.customerID      = exports.user_id.split('_')[0] + "_";  // determine the user and room prefix
 
 
 // plugins to load under plugins dir
 exports.pluginsToLoad   = [
-    {name: 'help',               path: 'help'},
-    {name: 'server',             path: 'webAI'},
-    {name: 'spotify',            path: 'spotify'},
-    {name: 'youtube',            path: 'youtube'},
-    {name: 'weather',            path: 'weather'},    
-    {name: 'maps',               path: 'maps'},
-    {name: 'calculator',         path: 'calculator'},
-    {name: 'time',               path: 'time'},
-    {name: 'greet',              path: 'greet'},
-    {name: 'haters',             path: 'haters'},    
-    {name: 'stock',              path: 'stock'},        
-    {name: 'sudo',               path: 'sudo'},            
-    {name: 'chucknorris',        path: 'chucknorris'},    
-    {name: 'likeaboss',          path: 'likeaboss'},        
-    {name: 'twss',               path: 'twss'},  
-    {name: 'shipit',             path: 'shipit'},        
-    {name: 'rules',              path: 'rules'},
-    {name: '9gag',               path: '9gag'},    
-    {name: 'bing',               path: 'bing'},    
-    {name: 'carlton',            path: 'carlton'},
-    {name: 'note2self',          path: 'note2self'},
-    {name: 'stackoverflow',      path: 'stackoverflow'},            
-    {name: 'googleimage',        path: 'googleimage'},                
-    {name: 'whoami',             path: 'whoami'},    
-    {name: 'lmgtfy',             path: 'lmgtfy'},
-    {name: 'mustachify',         path: 'mustachify'},    
-    {name: 'ithinkso',           path: 'ithinkso'},
-    {name: 'wikipedia',          path: 'wikipedia'},
-    {name: 'define',             path: 'define'},        
-    {name: 'insult',             path: 'insult'},            
-    {name: 'bart',               path: 'bart'},        
-    {name: 'langdocumentation',  path: 'langdocumentation'},        
-    {name: 'hipchatemoticons',   path: 'hipchatemoticons'},
-    {name: 'jeffdean',           path: 'jefdean'}
+    {name: 'help',    path: 'help' },
+    {name: 'server',  path: 'index'}
 ];
 
 
+exports.ldap_login      = '';
+exports.ldap_password   = '';
+exports.bing_api_key    = '';
+exports.bart_key        = '';
+exports.groupon_key     = '';
+exports.yahoo_api_key   = '';
+exports.dictionary_key  = '';
+exports.wolfram_key     = '';
 
-
-// specify '/bot' resource so we don't get the scrollbacks of rooms
-exports.jid          = exports.user_id + '@' + chat_server + '/bot';
-exports.customerID   = exports.user_id.split('_')[0] + "_";  // determine the user and room prefix
-
+exports.jid = exports.user_id + '@' + chat_server + '/bot';
 
 // Add the conference server string to each channel
-for (var i = 0; i < exports.rooms.length; i++) 
+for (var i = 0; i < exports.roomsToJoin.length; i++) 
 {
-    exports.rooms[i] = exports.customerID + exports.rooms[i] + '@' + conf_server;
+    exports.roomsToJoin[i] = exports.customerID + exports.roomsToJoin[i] + '@' + conf_server;
 }
-
 
