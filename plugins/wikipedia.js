@@ -24,7 +24,7 @@ module.exports[plugin.name] = function(get)
         {
             host : "api.bing.net",
             port : 80,
-            path : "/json.aspx?Appid="+Config.bing_api_key+"&sources=web&query=" + Util.padd(input) + "+site:" + site
+            path : "/json.aspx?Appid=" + Util.getKey("bing") +"&sources=web&query=" + Util.padd(input) + "+site:" + site
         };
 
         http.get(httpRequestParams, function(res) 

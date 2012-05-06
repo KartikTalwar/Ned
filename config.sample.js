@@ -40,14 +40,14 @@ exports.pluginsToLoad   = [
 ];
 
 
-exports.ldap_login      = '';
-exports.ldap_password   = '';
-exports.bing_api_key    = '';
-exports.bart_key        = '';
-exports.groupon_key     = '';
-exports.yahoo_api_key   = '';
-exports.dictionary_key  = '';
-exports.wolfram_key     = '';
+exports.ldap_login      = [''];
+exports.ldap_password   = [''];
+exports.bing_api_key    = [''];
+exports.bart_key        = [''];
+exports.groupon_key     = [''];
+exports.yahoo_api_key   = [''];
+exports.dictionary_key  = [''];
+exports.wolfram_key     = [''];
 
 exports.jid = exports.user_id + '@' + chat_server + '/bot';
 

@@ -160,7 +160,7 @@ module.exports[plugin.name] = function(get)
             {
                 host : "query.yahooapis.com",
                 port : 80,
-                path : "/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fapi.bart.gov%2Fapi%2Fsched.aspx%3Fcmd%3Ddepart%26orig%3D" + d1 + "%26dest%3D" + d2 + "%26date%3Dnow%26time%3D" + _ti + "%26key%3D" + Config.bart_key + "%26b%3D0%26a%3D3%26l%3D1'&format=json"
+                path : "/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fapi.bart.gov%2Fapi%2Fsched.aspx%3Fcmd%3Ddepart%26orig%3D" + d1 + "%26dest%3D" + d2 + "%26date%3Dnow%26time%3D" + _ti + "%26key%3D" + Util.getKey("bart") + "%26b%3D0%26a%3D3%26l%3D1'&format=json"
             };
 
             http.get(httpRequestParams, function(res) 

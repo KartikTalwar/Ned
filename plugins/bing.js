@@ -17,13 +17,13 @@ module.exports[plugin.name] = function(get)
     }
     else
     {
-        var input = Util.padd(get.message);print(get);
+        var input = Util.padd(get.message);
 
         var httpRequestParams = 
         {
             host: "api.bing.net",
             port: 80,
-            path: "/json.aspx?Appid=" + Config.bing_api_key + "&sources=web&query=" + input.replace(/[^^\000-\177]/, '')
+            path: "/json.aspx?Appid=" + Util.getKey("bing") + "&sources=web&query=" + input.replace(/[^^\000-\177]/, '')
         };
 
         http.get(httpRequestParams, function(res) 

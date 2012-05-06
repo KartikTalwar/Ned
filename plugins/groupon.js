@@ -15,7 +15,7 @@ module.exports[plugin.name] = function(get)
     {
         host : "api.groupon.com",
         port : 80,
-        path : "/v2/deals?client_id=" + Config.groupon_key
+        path : "/v2/deals?client_id=" + Util.getKey("groupon")
     };
 
 

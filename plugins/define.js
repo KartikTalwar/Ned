@@ -23,7 +23,7 @@ module.exports[plugin.name] = function(get)
         {
             host : "query.yahooapis.com",
             port : 80,
-            path : "/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww.abbreviations.com%2Fservices%2Fv2%2Fdefs.php%3Ftokenid%3D" + Config.dictionary_key + "%26word%3D" + Util.padd(input.split(' ')[0]) + "'&format=json"
+            path : "/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww.abbreviations.com%2Fservices%2Fv2%2Fdefs.php%3Ftokenid%3D" + Util.getKey("dictionary") + "%26word%3D" + Util.padd(input.split(' ')[0]) + "'&format=json"
         };
 
         http.get(httpRequestParams, function(res) 
