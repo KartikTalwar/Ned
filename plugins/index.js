@@ -1,16 +1,13 @@
-
 module.exports.load = function(bot) 
 {
-    var trigger = /(.+)$/;
-    var callerRegEx   = new RegExp(trigger.source, "i");
-    var pmCallerRegEx = new RegExp(Util.NedCaller.source + Util.NedPMName.source + trigger.source + "(.*)$", "i");
+    var callerRegEx = new RegExp("(.+)$", "i");
     
     bot.onMessage(callerRegEx, onMessage);
-    bot.onPrivateMessage(pmCallerRegEx, onMessage);
+    bot.onPrivateMessage(callerRegEx, onMessage);
 };
 
 
-var onMessage = function(channel, frm, msg, x) 
+var onMessage = function(channel, frm, msg, x)
 {
     var self             = this;
     var isPrivateMessage = (arguments.length == 3) ? true : false;
@@ -19,20 +16,17 @@ var onMessage = function(channel, frm, msg, x)
     var roomName         = channel.split('@')[0];
     var isSingleWord     = (tempMessage.indexOf(" ") == -1) ? true : false;
 
-    var caller           = /^([\@\!\#\$\~\%\/\\/]*)?/;
-    var ned              = (isPrivateMessage) ? 
-                           /([Nn][Ee][Dd][Dd]?([Dd]?[Aa][Rr][Dd])?(( *[^A-Za-z0-9]* *))?)?/ :
-                           /([Nn][Ee][Dd][Dd]?([Dd]?[Aa][Rr][Dd])?(( *[^A-Za-z0-9]* *))? ?)/; 
+    var ned              = (isPrivateMessage) ? Util.NedPMName.source : Util.NedName.source + "( ?)";
+    var regEx            = new RegExp(Util.NedCaller.source + ned, "i");
 
-    var regEx            = new RegExp(caller.source + ned.source, "i");
     var message          = tempMessage.replace(regEx, '');
-    var isPrivate        = (isPrivateMessage) ? 1 : 0;
+    var isPrivate        = (isPrivateMessage) ? true : false;
     var message          = message.split("+").join("%2B");
     var input            = message;
     var firstName        = '';
-    
 
-    if(!isPrivate) { firstName = from.split(' ')[0];}
+
+    if(!isPrivate) { firstName = from.split(' ')[0]; }
 
     print = function(txt)
     {
@@ -61,8 +55,8 @@ var onMessage = function(channel, frm, msg, x)
                    'isPrivate'  : isPrivate,
                    'isEmpty'    : ''
                   }
-                   
-                           
+
+
         for(var i=0; i<files.length; i++)
         {
             var plugin   = files[i];
@@ -76,9 +70,8 @@ var onMessage = function(channel, frm, msg, x)
                 var trigger = execute.plugin.trigger;
                 var enabled = execute.plugin.enabled.toLowerCase();
                 var fuzzy   = execute.plugin.fuzzy;
-                
                 var details = { "name" : name, "trigger" : trigger, "fuzzy" : fuzzy, 'run' : execute[name] };
-                
+
                 if(enabled == 'true')
                 {
                     plugins[name] = details;
@@ -104,18 +97,32 @@ var onMessage = function(channel, frm, msg, x)
                 var det  = plugins[id];
                 var trig = det.trigger;
                 var fuzz = det.fuzzy;
-                
+
                 if(typeof trig == "object")
                 {
-                    var regex = new RegExp(caller.source + ned.source, "i");
+                    var regex = new RegExp(Util.NedCaller.source + ned, "i");
 
                     if(tempMessage.match(regex))
                     {
-                        var threshold = (fuzz == "true") ? 0.80 : 0.99; 
-                        var closest = Util.getClosest(message, trig, threshold);
+                        var threshold = (fuzz == "true") ? 0.80 : 0.99;
+                        var closest   = Util.getClosest(message, trig, threshold);
 
                         if(closest != null)
                         {
+                            if(!closest[1])
+                            {
+                                var brk = closest[0].split(' ');
+
+                                if(typeof brk == "object")
+                                {
+                                    message = message.split(' ').splice(brk.length).join(' ');
+                                }
+                                else
+                                {
+                                    message = message.substring(brk.length);
+                                }
+                            }
+
                             params.message  = getTerm(message, plugins[id].trigger);
                             params.isEmpty  = (params.message.split(' ').join('').length == 0 || params.message.length == 0) ? true : false;
                             params.pluginId = id;
@@ -152,7 +159,7 @@ var onMessage = function(channel, frm, msg, x)
             }
             else
             {
-                var regex = ned.source + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy).*$";
+                var regex = ned + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy).*$";
 
                 if(params.fullMessage.match(regex))
                 {
@@ -160,7 +167,7 @@ var onMessage = function(channel, frm, msg, x)
                 }
                 else
                 {
-                    if(params.fullMessage.match(ned.source + ".*$") && Util.triggersRandom([2, 4, 6]))
+                    if(params.fullMessage.match(ned + ".*$") && Util.triggersRandom([2, 4, 6]))
                     {
                         plugins["wolfram"].run(params);
                     }

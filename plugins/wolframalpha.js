@@ -2,7 +2,7 @@ var plugin = {
               name        : 'wolfram',
               trigger     : ['wolfram'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'wolframs things for you',
               usage       : 'ned wolfram 5^123'
              };
@@ -20,7 +20,7 @@ module.exports[plugin.name] = function(get)
         path: "/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http://api.wolframalpha.com/v2/query%3Fappid%3D" + Config.wolfram_key + "%26input%3D" + msg + "'&format=json"
     };
 
-    http.get(httpRequestParams, function(res) 
+    http.get(httpRequestParams, function(res)
     {
         var data = '';
 

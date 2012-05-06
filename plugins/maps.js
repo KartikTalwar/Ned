@@ -2,7 +2,7 @@ var plugin = {
               name        : 'maps',
               trigger     : ['map', 'locate', 'directions'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Displays a map of the given location',
               usage       : 'ned map of Toronto'
              };

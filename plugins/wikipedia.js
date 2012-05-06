@@ -2,7 +2,7 @@ var plugin = {
               name        : 'wikipedia',
               trigger     : ['wikipedia','w'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Gives you the wikipedia topic, given a query',
               usage       : '@ned w Albert Einstein'
              };

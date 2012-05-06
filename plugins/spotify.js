@@ -2,7 +2,7 @@ var plugin = {
               name        : 'spotify',
               trigger     : ['spot me', 'spot ', 'spotify', 'sp '],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Returns the spotify url of a song',
               usage       : 'ned spot me everlong'
              };

@@ -2,7 +2,7 @@ var plugin = {
               name        : 'stocks',
               trigger     : ['stock', 'stocks'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Gets the latest stock quote chart',
               usage       : 'ned stock GOOG'
              };

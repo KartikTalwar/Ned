@@ -2,7 +2,7 @@ var plugin = {
               name        : 'mustachify',
               trigger     : ['mustachify', 'moustachify'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Type in mustachify and enter a url with a human face',
               usage       : 'ned mustachify http://i47.tinypic.com/2u4t16p.jpg'
              };

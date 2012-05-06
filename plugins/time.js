@@ -2,7 +2,7 @@ var plugin = {
               name        : 'time',
               trigger     : ['whats the time', 'the time', 'what is the current time', 'tell me the time', 'what time is it', 'what time it is', 'time', 'current time', 'date', 'whats the date', 'todays date'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Tells you the time',
               usage       : 'ned time'
              };

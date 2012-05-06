@@ -2,7 +2,7 @@ var plugin = {
               name        : 'stackoverflow',
               trigger     : ['stackoverflow','so'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Returns results from stackoverflow',
               usage       : '@ned so Out of memory error'
              };

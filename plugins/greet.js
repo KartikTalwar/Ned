@@ -2,7 +2,7 @@ var plugin = {
               name        : 'greet',
               trigger     : ['hi', 'hello', 'hey', 'whatsup', 'yo', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup', 'whatsup'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : '',
               usage       : ''
              };

@@ -2,7 +2,7 @@ var plugin = {
               name        : 'youtube',
               trigger     : ['yt', 'youtube', 'utube', 'watch', 'video of'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Returns the first youtube video',
               usage       : 'ned yt evolution of dance'
              };

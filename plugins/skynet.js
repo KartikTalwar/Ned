@@ -3,7 +3,6 @@ var plugin = {
               trigger     : "([Nn]ed .+[Ss]kynet.*)$",
               enabled     : 'true',
               fuzzy       : 'false',
-              general     : 'true',
               description : '',
               usage       : ''
              };

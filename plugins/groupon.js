@@ -2,7 +2,7 @@ var plugin = {
               name        : 'groupon',
               trigger     : ['groupon deal', 'todays groupon'],
               enabled     : 'true',
-              fuzzy       : 'false',
+              fuzzy       : 'true',
               description : 'Returns today\'s groupon deal',
               usage       : '@ned todays groupon'
              };
