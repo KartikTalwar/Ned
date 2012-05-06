@@ -7,26 +7,53 @@ Brain   = require('./lib/brain');
 http    = require('http');
 
 
-
-var wobot = require('wobot');
-
-NedBot = new wobot.Bot(
+Util.getFilesFromDir('plugins', function(err, files)
 {
-    debug: Config.debugXMPP,
-    jid: Config.jid,
-    password: Config.password,
-    name: Config.name
+    plugins = {};
+
+    for(var i=0; i<files.length; i++)
+    {
+        var plugin   = files[i];
+        var toImport = './plugins/' + plugin.substring(plugin.indexOf('/'));
+        var dontinc  = ['plugins/index.js', 'plugins/help.js'];
+
+        if(!Util.in_array(plugin, dontinc) && plugin.split('.').pop() == "js")
+        {
+            var execute = require(toImport);
+            var name    = execute.plugin.name;
+            var trigger = execute.plugin.trigger;
+            var enabled = execute.plugin.enabled.toLowerCase();
+            var fuzzy   = execute.plugin.fuzzy;
+            var details = { "name" : name, "trigger" : trigger, "fuzzy" : fuzzy, 'run' : execute[name] };
+
+            if(enabled == 'true')
+            {
+                plugins[name] = details;
+            }
+        }
+    }
 });
 
 
-
-for (var i = 0; i < Config.pluginsToLoad.length; i++) 
+for(var i=0; i<Config.roomsToJoin.length; i++) 
 {
-    NedBot.loadPlugin(Config.pluginsToLoad[i].name, require('./plugins/' + Config.pluginsToLoad[i].path));
+    Config.roomsToJoin[i] = Config.customerID + Config.roomsToJoin[i] + '@' + Config.conf_server;
 }
 
-NedBot.connect();
+var wobot = require('wobot');
+var main  = "index.js";
 
+NedBot = new wobot.Bot(
+{
+    debug    : Config.debugXMPP,
+    jid      : Config.user_id + '@' + Config.chat_server + '/bot',
+    password : Config.password,
+    name     : Config.name
+});
+
+
+NedBot.loadPlugin("main", require('./plugins/' + main));
+NedBot.connect();
 
 
 NedBot.onConnect(function() 
@@ -52,7 +79,7 @@ NedBot.onConnect(function()
     }
     else
     {
-        for (var i = 0; i < Config.roomsToJoin.length; i++) 
+        for (var i=0; i<Config.roomsToJoin.length; i++) 
         {
             Util.consoleLog('Joining: ' + Config.roomsToJoin[i].toString().split('@')[0]);
             self.join(Config.roomsToJoin[i]);
@@ -72,8 +99,8 @@ NedBot.onInvite(function(roomJid, fromJid, reason)
 
     self.getRoster(function(err, roster, stanza)
     {
-        var from  = fromJid["user"]+"@"+fromJid["domain"];
-        var group = roomJid["user"]+"@"+roomJid["domain"];
+        var from  = fromJid["user"] + "@" + fromJid["domain"];
+        var group = roomJid["user"] + "@" + roomJid["domain"];
 
         for(var i=0; i<roster.length; i++)
         {
@@ -137,5 +164,4 @@ process.on('uncaughtException', function(err)
 {
     Util.consoleLog('Caught exception: ' + err);
 });
-
 
