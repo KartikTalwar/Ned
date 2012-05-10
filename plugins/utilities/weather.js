@@ -14,7 +14,7 @@ module.exports[plugin.name] = function(get)
     var bad   = ['for ', 'of ', 'in '];
     var input = Util.padd(Util.removeBad(get.message, bad)).split('+').join('%2b');
 
-    if(input.indexOf('here') == 0 || input.indexOf('now') == 0 || input.indexOf('outside') == 0 || input.length < 3) { input = "san+francisco"; }
+    if(input.indexOf('here') == 0 || input.indexOf('now') == 0 || input.indexOf('outside') == 0 || input.length < 3) { input = Config.city; }
 
     var httpRequestParams =
     {
