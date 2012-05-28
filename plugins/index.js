@@ -46,17 +46,16 @@ var onMessage = function(channel, frm, msg, x)
                   }
 
 
-    var getTerm = function(msg, list)
-                  {
-                      var terms = "(" + list.join('|') + ")";
-                      var clean = msg.replace(RegExp(terms, "i"), '');
-
-                      return Util.clarify(clean);
-                  }
-
-
     var analyze = function(message, fullMessage, plugins)
                   {
+                      var getTerm = function(msg, list)
+                                    {
+                                        var terms = "(" + list.join('|') + ")";
+                                        var clean = msg.replace(RegExp(terms, "i"), '');
+
+                                        return Util.clarify(clean);
+                                    }
+
                       for(i in plugins)
                       {
                           var id   = i;
@@ -116,19 +115,11 @@ var onMessage = function(channel, frm, msg, x)
         }
         else
         {
-            var skynet = "wolfram";
-            var regex  = ned + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy|[Hh]ow).*$";
+            var regex  = ned + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy|[Hh]ow) .*$";
 
-            if(parameters.fullMessage.match(regex))
+            if(parameters.fullMessage.match(regex) && parameters.fullMessage.replace(regex, '').length > 5)
             {
-                plugins[skynet].run(parameters);
-            }
-            else
-            {
-                if(parameters.fullMessage.match(ned + ".*$") && Util.triggersRandom([2, 4, 6]))
-                {
-                    plugins[skynet].run(parameters);
-                }
+                plugins["wolfram"].run(parameters);
             }
         }
     }
