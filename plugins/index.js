@@ -46,61 +46,7 @@ var onMessage = function(channel, frm, msg, x)
                   }
 
 
-    var analyze = function(message, fullMessage, plugins)
-                  {
-                      var getTerm = function(msg, list)
-                                    {
-                                        var terms = "(" + list.join('|') + ")";
-                                        var clean = msg.replace(RegExp(terms, "i"), '');
-
-                                        return Util.clarify(clean);
-                                    }
-
-                      for(i in plugins)
-                      {
-                          var id   = i;
-                          var det  = plugins[id];
-                          var trig = det.trigger;
-                          var fuzz = det.fuzzy;
-
-                          if(typeof trig == "object")
-                          {
-                              if(fullMessage.match(new RegExp(Util.NedCaller.source + ned, "i")))
-                              {
-                                  var threshold = (fuzz == "true") ? 0.80 : 0.99;
-                                  var closest   = Util.getClosest(message, trig, threshold);
-
-                                  if(closest != null)
-                                  {
-                                      if(!closest[1])
-                                      {
-                                          var brk = closest[0].split(' ');
-                                          message = (typeof brk == "object") ? message.split(' ').splice(brk.length).join(' ') : message.substring(brk.length);
-                                      }
-
-                                      parameters.message  = getTerm(message, plugins[id].trigger);
-                                      parameters.isEmpty  = (parameters.message.split(' ').join('').length == 0) ? true : false;
-                                      parameters.pluginId = id;
-
-                                      return id;
-                                  }
-                              }
-                          }
-                          else
-                          {
-                              if(fullMessage.match(new RegExp(trig, 'i')))
-                              {
-                                  parameters.pluginId = id;
-                                  return id;
-                              }
-                          }
-                      }
-
-                      return null;
-                  }
-
-
-    var detectPlugin = analyze(message, fullMessage, plugins);
+    var detectPlugin = Brain.analyze(message, fullMessage, plugins, parameters);
 
 
     if(detectPlugin != null)
