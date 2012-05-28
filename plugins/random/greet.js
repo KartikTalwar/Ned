@@ -1,6 +1,6 @@
 var plugin = {
               name        : 'greet',
-              trigger     : ['hi', 'hello', 'hey', 'whatsup', 'yo', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup', 'whatsup'],
+              trigger     : ['hi', 'hello', 'hey', 'whatsup', 'yo', 'whattup', 'wattup', 'how are you', 'hows it going', 'wassup', 'whatsup', 'how you doin', 'how are you doing'],
               enabled     : 'true',
               fuzzy       : 'true',
               description : '',
@@ -17,6 +17,10 @@ module.exports[plugin.name] = function(get)
 
 
     if(Util.it_has(get.fullMessage, 'it goin') || Util.it_has(get.fullMessage, 'e you'))
+    {
+        sendMessage(generic + ", I'm " + Util.chooseRandom(greetings) + ", fine thank you");
+    }
+    if(Util.it_has(get.fullMessage, 'you doin'))
     {
         sendMessage(generic + ", I'm " + Util.chooseRandom(greetings) + ", fine thank you");
     }
