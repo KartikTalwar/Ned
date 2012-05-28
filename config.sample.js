@@ -1,59 +1,63 @@
-// NOTE: HipChat XMPP details such as the jid and channels to join can be obtained
+  
+// HipChat XMPP details such as the jid and channels to join can be obtained
 // from https://www.hipchat.com/account/xmpp
 
-var conf_server         = 'conf.hipchat.com';
-var chat_server         = 'chat.hipchat.com';
-var user_email          = 'nedbot@mysite.com';  // just for reference
-
-exports.user_id         = '0000_123456';
-exports.password        = '';
-exports.name            = 'Ned Bot'; // this must match the actual name as set on hipchat.com
-
-
-// channels for the bot to join upon connect and alerts configuration
-exports.roomsToJoin  = [
-    'botz',
-    'all_employees'
-];
+var conf_server     = 'conf.hipchat.com';
+var chat_server     = 'chat.hipchat.com';
+var user_id         = 'XXXX_01234';
+var password        = '';
+var name            = 'Ned Bot';
+var city            = "San Francisco";
+var admins          = ['01234', ''];    // other admin users hipchat ids [without the company id (aka after the "_") ]
 
 
-// Only bother editing this if you will be setting joinAllRooms below to true
-exports.roomsNotToJoin = [
-    'super_duper_secret_room'
-];
+var roomsToJoin     = [
+                       'botz',
+                       '',
+                       ''   // dont forget the comma when extending
+                      ];
+
+var roomsNotToJoin  = [
+                       'super_duper_secret_room'
+                       '',
+                       ''   // dont forget the comma when extending
+                      ];
+
+var api_keys        = {
+                        "bing"       : [''],
+                        "bart"       : [''],
+                        "groupon"    : [''],
+                        "dictionary" : [''],
+                        "wolfram"    : ['']
+                      }
 
 
-exports.admins = ['123456', '123456'];
+
+var printToConsole  = true;   // print logging to stdout
+var debugXMPP       = false;  // print XMPP protocol dump for debug (very verbose)
+var joinAllRooms    = false;  // join all rooms or not
+var reconnectWaitMs = 10000;  // time (s) before reconnect attempt
 
 
-exports.printToConsole  = true;   // print logging to stdout
-exports.debugXMPP       = false;  // print XMPP protocol dump for debug (very verbose)
-exports.joinAllRooms    = false;
-exports.reconnectWaitMs = 10000; // time before reconnect attempt
-exports.customerID      = exports.user_id.split('_')[0] + "_";  // determine the user and room prefix
 
 
-// plugins to load under plugins dir
-exports.pluginsToLoad   = [
-    {name: 'help',    path: 'help' },
-    {name: 'server',  path: 'index'}
-];
 
 
-exports.ldap_login      = [''];
-exports.ldap_password   = [''];
-exports.bing_api_key    = [''];
-exports.bart_key        = [''];
-exports.groupon_key     = [''];
-exports.yahoo_api_key   = [''];
-exports.dictionary_key  = [''];
-exports.wolfram_key     = [''];
-
-exports.jid = exports.user_id + '@' + chat_server + '/bot';
-
-// Add the conference server string to each channel
-for (var i = 0; i < exports.roomsToJoin.length; i++) 
-{
-    exports.roomsToJoin[i] = exports.customerID + exports.roomsToJoin[i] + '@' + conf_server;
-}
+// The magic happens here
+exports.api_keys        = api_keys;
+exports.conf_server     = conf_server;
+exports.chat_server     = chat_server;
+exports.user_id         = user_id;
+exports.password        = password;
+exports.name            = name;
+exports.roomsToJoin     = roomsToJoin;
+exports.roomsNotToJoin  = roomsNotToJoin;
+exports.admins          = admins;
+exports.city            = city;
+exports.printToConsole  = printToConsole;
+exports.debugXMPP       = debugXMPP;
+exports.joinAllRooms    = joinAllRooms;
+exports.reconnectWaitMs = reconnectWaitMs;
+exports.customerID      = user_id.split('_')[0] + "_";
+exports.api_keys        = api_keys;
 
