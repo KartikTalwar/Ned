@@ -46,7 +46,7 @@ var onMessage = function(channel, frm, msg, x)
                   }
 
 
-    var detectPlugin = Brain.analyze(message, fullMessage, plugins, parameters);
+    var detectPlugin = Brain.analyze(plugins, parameters);
 
 
     if(detectPlugin != null)
