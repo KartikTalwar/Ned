@@ -3,10 +3,10 @@
 
 ## About
 
-#### Ned is an XMPP bot, build on top of `wobot` that adds useful features like doing web searches, todo lists, weather information and much more to HipChat and allows you to have access to external data without the trouble of leaving your chat window.
+Ned is an XMPP bot, build on top of `wobot` that adds useful features like doing web searches, todo lists, weather information and much more to HipChat and allows you to have access to external data without the trouble of leaving your chat window.
 
 
-**Why is it called Ned?**
+### Why is it called Ned?
 
 Because, Skynet was taken.
 
@@ -14,45 +14,54 @@ Because, Skynet was taken.
 ## Installation
 
 ### Dependencies
-----------------------------
 
-**Node.js**
-
-```sh
-$ wget http://nodejs.org/dist/v0.6.13/node-v0.6.13.tar.gz
-$ cd node-v0.6.13
-$ sudo ./configure
-$ sudo make
-$ sudo make install
-```
-
-**NPM**
-
-```sh
-$ sudo curl http://npmjs.org/install.sh | sh
-```
+- Node.js
+- NPM
+- libexpat1
+- libicu
 
 
-**Various Packages**
+##### Click here for detailed instructions on [Installing Dependencies] (https://github.com/KartikTalwar/Ned/wiki/Installing-Dependencies)
 
-```sh 
-$ sudo apt-get install libexpat1-dev
-$ sudo apt-get install libicu-dev
-```
 
 ### Installing Ned
-----------------------------
+
 
 **Downloading the files**
 
 ```
 $ git clone https://github.com/KartikTalwar/Ned.git
 $ cd Ned
+```
+
+**Installing Node Packages**
+
+This should be installed in the same folder such that a folder `Ned/node_modules` exists
+
+```
 $ npm install wobot
 $ npm install request
 $ npm install sqlite3
 $ npm install node-stringprep
 ```
+
+## Configuring the Bot
+
+- Rename `config.sample.js` to **`config.js`** and edit the following
+
+
+|    **Setting**     |                                   **Value**                                     |
+|:------------------:|:-------------------------------------------------------------------------------:|
+|  *conf_server*     |  Usually `conf.hipchat.com`                                                     |
+|  *chat_server*     |  Usually `chat.hipchat.com`                                                     |
+|  *user_id*         |  The user id of the bot (generally customerid_userid)                           |
+|  *password*        |  Password for the id above                                                      |
+|  *name*            |  Should be **Ned Bot** since it replys to *ned + command*                       |
+|  *city*            |  The local city for weather details                                             |
+|  *admins*          |  The userid (number after customer id) for other users for `simon says` plugin  |
+|  *roomsToJoin*     |  Array of room names (spaces with _) that it will join upon start               |
+|  *roomsNotToJoin*  |  Array of room names that it will never join unless invited                     |
+|  *api_keys*        |  API keys for different services for plugins                                    |
 
 
 ## Starting the Bot
@@ -61,12 +70,6 @@ $ npm install node-stringprep
 
 ```sh
 $ node server.js
-```
-
-#### Logging
-
-```sh
-$ node server.js | tee log.txt
 ```
 
 
