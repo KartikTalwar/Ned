@@ -96,16 +96,11 @@ module.exports.plugin = plugin;
 
 module.exports[plugin.name] = function(get)
 {
+    /* Available Methods: */
 
-    /* Available Data: */
-
-    // get.message
-    // get.from
-    // get.firstName
-    // get.roomName
-    // get.fullMessage
-    // get.isPrivate
-    // get.isEmpty
+    // get.from              get.firstName              get.roomName
+    // get.message           get.fullMessage 
+    // get.isPrivate         get.isEmpty
 
     var response = "Hello, " + get.fistName + "from " + get.roomName;
     sendMessage(response);
