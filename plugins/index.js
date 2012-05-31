@@ -9,21 +9,20 @@ module.exports.load = function(bot)
 
 var onMessage = function(channel, frm, msg, x)
 {
-    var self             = this;
-    var isPrivateMessage = (arguments.length == 3) ? true : false;
-    var from             = isPrivateMessage ? '' : frm;
-    var fullMessage      = isPrivateMessage ? frm : msg;
-    var roomName         = channel.split('@')[0];
-    var isSingleWord     = (fullMessage.indexOf(" ") == -1) ? true : false;
+    var self        = this;
+    var isPM        = (arguments.length == 3) ? true : false;
+    var from        = isPM ? ''  : frm;
+    var fullMessage = isPM ? frm : msg;
+    var roomName    = channel.split('@')[0];
 
-    var ned              = (isPrivateMessage) ? Util.NedPMName.source : Util.NedName.source + "( ?)";
-    var regEx            = new RegExp(Util.NedCaller.source + ned, "i");
+    var ned         = (isPM) ? Util.NedPMName.source : Util.NedName.source + "( ?)";
+    var regEx       = new RegExp(Util.NedCaller.source + ned, "i");
 
-    var message          = fullMessage.replace(regEx, '');
-    var isPrivate        = (isPrivateMessage) ? true : false;
-    var message          = message.split("+").join("%2B");
-    var input            = message;
-    var firstName        = (!isPrivate) ? from.split(' ')[0] : '';
+    var message     = fullMessage.replace(regEx, '');
+    var isPrivate   = (isPM) ? true : false;
+    var message     = message.split("+").join("%2B");
+    var input       = message;
+    var firstName   = (!isPrivate) ? from.split(' ')[0] : '';
 
 
     parameters  = {
