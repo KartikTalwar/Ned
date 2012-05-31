@@ -25,24 +25,24 @@ var onMessage = function(channel, frm, msg, x)
     var firstName   = (!isPrivate) ? from.split(' ')[0] : '';
 
 
-    parameters  = {
-                   'message'    : message,
-                   'fullMessage': fullMessage,
-                   'from'       : from,
-                   'firstName'  : firstName,
-                   'channel'    : channel,
-                   'room'       : roomName.split('_')[1],
-                   'isPrivate'  : isPrivate,
-                  }
+    parameters      = {
+                       'message'    : message,
+                       'fullMessage': fullMessage,
+                       'from'       : from,
+                       'firstName'  : firstName,
+                       'channel'    : channel,
+                       'room'       : roomName.split('_')[1],
+                       'isPrivate'  : isPrivate,
+                      }
 
 
-    sendMessage = function(txt, group)
-                  {
-                      var ch = (typeof group == 'undefined') ? channel : group;
-                      self.message(ch, txt);
+    sendMessage     = function(txt, group)
+                      {
+                          var ch = (typeof group == 'undefined') ? channel : group;
+                          self.message(ch, txt);
 
-                      return true;
-                  }
+                          return true;
+                      }
 
 
     var detectPlugin = Brain.analyze(plugins, parameters);
