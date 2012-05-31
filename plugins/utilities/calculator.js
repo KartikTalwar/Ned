@@ -17,7 +17,7 @@ module.exports[plugin.name] = function(get)
     }
     else
     {
-        var input = Util.padd(get.message);print(get);
+        var input = Util.padd(get.message);
 
         var httpRequestParams = 
         {
