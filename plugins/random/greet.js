@@ -19,14 +19,17 @@ module.exports[plugin.name] = function(get)
     if(Util.it_has(get.fullMessage, 'it goin') || Util.it_has(get.fullMessage, 'e you'))
     {
         sendMessage(generic + ", I'm " + Util.chooseRandom(greetings) + ", fine thank you");
+        return;
     }
     if(Util.it_has(get.fullMessage, 'you doin'))
     {
         sendMessage(generic + ", I'm " + Util.chooseRandom(greetings) + ", fine thank you");
+        return;
     }
     else if(Util.it_has(get.fullMessage, 'dawg') || Util.it_has(get.fullMessage, 'dog'))
     {
         sendMessage("Yo Dawg");
+        return;
     }
     else
     {
