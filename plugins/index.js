@@ -51,7 +51,14 @@ var onMessage = function(channel, frm, msg, x)
 
     if(detectPlugin != null)
     {
-        plugins[detectPlugin].run(parameters);
+        try
+        {
+            plugins[detectPlugin].run(parameters);
+        }
+        catch(err)
+        {
+            print("Tried running " + detectPlugin + " but got this error:\n" + err);
+        }
     }
     else
     {
@@ -65,7 +72,14 @@ var onMessage = function(channel, frm, msg, x)
 
             if(parameters.fullMessage.match(regex) && parameters.fullMessage.replace(regex, '').length > 5)
             {
-                plugins["wolfram"].run(parameters);
+                try
+                {
+                    plugins["wolfram"].run(parameters);
+                }
+                catch(err)
+                {
+                    print("Tried running wolfram but got this error:\n" + err);
+                }
             }
         }
     }
