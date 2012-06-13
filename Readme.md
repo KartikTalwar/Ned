@@ -118,5 +118,5 @@ module.exports[plugin.name] = function(get)
 
 ## Legal Stuff
 
-Copyright (C) 2012 Kartik Talwar. See [LICENSE](https://github.com/KartikTalwar/Ned/blob/master/LICENSE) for details.
+Copyright (C) 2012 Kartik Talwar. See [LICENSE](https://github.com/KartikTalwar/Ned/blob/master/LICENSE.md) for details.
 
