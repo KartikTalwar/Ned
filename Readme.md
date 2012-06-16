@@ -52,16 +52,16 @@ $ npm install node-stringprep
 
 |    **Setting**     |                                   **Value**                                     |
 |:------------------:|:-------------------------------------------------------------------------------:|
-|  *conf_server*     |  Usually `conf.hipchat.com`                                                     |
-|  *chat_server*     |  Usually `chat.hipchat.com`                                                     |
-|  *user_id*         |  The user id of the bot (generally customerid_userid)                           |
+|  *confServer*      |  Usually `conf.hipchat.com`                                                     |
+|  *chatServer*      |  Usually `chat.hipchat.com`                                                     |
+|  *userID*          |  The user id of the bot (generally customerid_userid)                           |
 |  *password*        |  Password for the id above                                                      |
 |  *name*            |  Should be **Ned Bot** since it replys to *ned + command*                       |
 |  *city*            |  The local city for weather details                                             |
 |  *admins*          |  The userid (number after customer id) for other users for `simon says` plugin  |
 |  *roomsToJoin*     |  Array of room names (spaces with _) that it will join upon start               |
 |  *roomsNotToJoin*  |  Array of room names that it will never join unless invited                     |
-|  *api_keys*        |  API keys for different services for plugins                                    |
+|  *apiKeys*         |  API keys for different services for plugins                                    |
 
 
 ## Starting the Bot

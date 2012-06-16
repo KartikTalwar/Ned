@@ -2,9 +2,9 @@
 // HipChat XMPP details such as the jid and channels to join can be obtained
 // from https://www.hipchat.com/account/xmpp
 
-var conf_server     = 'conf.hipchat.com';
-var chat_server     = 'chat.hipchat.com';
-var user_id         = 'XXXX_01234';
+var confServer      = 'conf.hipchat.com';
+var chatServer      = 'chat.hipchat.com';
+var userID          = 'XXXX_01234';
 var password        = '';
 var name            = 'Ned Bot';
 var city            = "San Francisco";
@@ -23,7 +23,7 @@ var roomsNotToJoin  = [
                        ''   // dont forget the comma when extending
                       ];
 
-var api_keys        = {
+var apiKeys         = {
                         "bing"       : [''],
                         "bart"       : [''],
                         "groupon"    : [''],
@@ -44,10 +44,9 @@ var reconnectWaitMs = 10000;  // time (s) before reconnect attempt
 
 
 // The magic happens here
-exports.api_keys        = api_keys;
-exports.conf_server     = conf_server;
-exports.chat_server     = chat_server;
-exports.user_id         = user_id;
+exports.confServer      = confServer;
+exports.chatServer      = chatServer;
+exports.userID          = userID;
 exports.password        = password;
 exports.name            = name;
 exports.roomsToJoin     = roomsToJoin;
@@ -58,6 +57,6 @@ exports.printToConsole  = printToConsole;
 exports.debugXMPP       = debugXMPP;
 exports.joinAllRooms    = joinAllRooms;
 exports.reconnectWaitMs = reconnectWaitMs;
-exports.customerID      = user_id.split('_')[0] + "_";
-exports.api_keys        = api_keys;
+exports.customerID      = userID.split('_')[0] + "_";
+exports.apiKeys         = apiKeys;
 
