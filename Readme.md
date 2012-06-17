@@ -32,6 +32,7 @@ Because, Skynet was taken.
 ```
 $ git clone https://github.com/KartikTalwar/Ned.git
 $ cd Ned
+$ cp config.sample.js config.js
 ```
 
 **Installing Node Packages**
@@ -47,19 +48,19 @@ $ npm install node-stringprep
 
 ## Configuring the Bot
 
-- Rename `config.sample.js` to **`config.js`** and edit the following
+**Editing `config.js`**
 
 
 |    **Setting**     |                                   **Value**                                     |
 |:------------------:|:-------------------------------------------------------------------------------:|
-|  *confServer*      |  Usually `conf.hipchat.com`                                                     |
-|  *chatServer*      |  Usually `chat.hipchat.com`                                                     |
-|  *userID*          |  The user id of the bot (generally customerid_userid)                           |
+|  *confServer*      |  Usually **`conf.hipchat.com`**                                                 |
+|  *chatServer*      |  Usually **`chat.hipchat.com`**                                                 |
+|  *userID*          |  The user id of the bot (generally **customerid_userid**)                       |
 |  *password*        |  Password for the id above                                                      |
 |  *name*            |  Should be **Ned Bot** since it replys to *ned + command*                       |
 |  *city*            |  The local city for weather details                                             |
 |  *admins*          |  The userid (number after customer id) for other users for `simon says` plugin  |
-|  *roomsToJoin*     |  Array of room names (spaces with _) that it will join upon start               |
+|  *roomsToJoin*     |  Array of room names (spaces with **_** ) that it will join upon start          |
 |  *roomsNotToJoin*  |  Array of room names that it will never join unless invited                     |
 |  *apiKeys*         |  API keys for different services for plugins                                    |
 
