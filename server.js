@@ -183,39 +183,19 @@ process.on('uncaughtException', function(err)
                     name     : Config.name
                 });
 
-                if(typeof row == "undefined")
+                if( (ts - row["time"]) >= Config.imBrokenMsgFreq * 60 )
                 {
-                    memory.run("INSERT INTO Debug(user, attempts, time) VALUES (?, ?, ?)", [tm, 1, ts]);
-                    NedBot.connect();
+                    var counter = row["attempts"] + 1;
 
-                    NedBot.onConnect(function() 
+                    NedBot.connect();
+                    NedBot.onConnect(function()
                     {
                         this.message(tm, Config.imBrokenMessage);
                         Util.consoleLog(Config.imBrokenMessage);
                     });
 
+                    memory.run("INSERT INTO Debug(user, attempts, time) VALUES (?, ?, ?)", [tm, counter, ts]);
                     NedBot.disconnect();
-                }
-                else
-                {
-                    var usrid = row["id"];
-                    var attmp = row["attempts"];
-                    var time  = row["time"];
-
-                    if( (ts - time) > Config.imBrokenMsgFreq*60 )
-                    {
-                        var counter = attmp + 1;
-
-                        NedBot.connect();
-                        NedBot.onConnect(function() 
-                        {
-                            this.message(tm, Config.imBrokenMessage);
-                            Util.consoleLog(Config.imBrokenMessage);
-                        });
-
-                        memory.run("INSERT INTO Debug(user, attempts, time) VALUES (?, ?, ?)", [tm, counter, ts]);
-                        NedBot.disconnect();
-                    }
                 }
             });
         }
