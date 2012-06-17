@@ -1,4 +1,4 @@
-# Ned Bot - Artificial Intelligence for HipChat
+# Ned Bot - Artificial Artificial Intelligence for HipChat
 
 
 ## About
