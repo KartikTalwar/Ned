@@ -37,7 +37,8 @@ var printToConsole  = true;   // print logging to stdout
 var debugXMPP       = false;  // print XMPP protocol dump for debug (very verbose)
 var joinAllRooms    = false;  // join all rooms or not
 var reconnectWaitMs = 10000;  // time (s) before reconnect attempt
-
+var reconnectWaitMs = 10000;  // seconds before reconnect attempt
+var imBrokenMsgFreq = 2;      // minutes before "I am broken" is sent to admin on error
 
 
 
@@ -59,4 +60,6 @@ exports.joinAllRooms    = joinAllRooms;
 exports.reconnectWaitMs = reconnectWaitMs;
 exports.customerID      = userID.split('_')[0] + "_";
 exports.apiKeys         = apiKeys;
+exports.imBrokenMsgFreq = imBrokenMsgFreq;
+exports.imBrokenMessage = "Hello Admin, I just crashed. Can you restart me again?";
 

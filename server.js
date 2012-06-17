@@ -37,7 +37,7 @@ Util.getFilesFromDir('plugins', function(err, files)
 
 for(var i=0; i<Config.roomsToJoin.length; i++) 
 {
-    Config.roomsToJoin[i] = Config.customerID + Config.roomsToJoin[i] + '@' + Config.conf_server;
+    Config.roomsToJoin[i] = Config.customerID + Config.roomsToJoin[i] + '@' + Config.confServer;
 }
 
 var wobot = require('wobot');
@@ -46,7 +46,7 @@ var main  = "index.js";
 NedBot = new wobot.Bot(
 {
     debug    : Config.debugXMPP,
-    jid      : Config.user_id + '@' + Config.chat_server + '/bot',
+    jid      : Config.userID + '@' + Config.chatServer + '/bot',
     password : Config.password,
     name     : Config.name
 });
@@ -89,7 +89,7 @@ NedBot.onConnect(function()
 
 
 
-NedBot.onInvite(function(roomJid, fromJid, reason) 
+NedBot.onInvite(function(roomJid, fromJid, reason)
 {
     Util.consoleLog('Invited: ' + roomJid.toString().split('@')[0]);
     Util.consoleLog('Joining: ' + roomJid.toString().split('@')[0]);
@@ -120,7 +120,7 @@ NedBot.onInvite(function(roomJid, fromJid, reason)
 
 NedBot.onDisconnect(function() 
 {
-    var reconnect = setTimeout(function() 
+    var reconnect = setTimeout(function()
     {
         Util.consoleLog('Reconnecting');
         this.connect();
@@ -163,5 +163,66 @@ NedBot.onPrivateMessage(function(jid, message)
 process.on('uncaughtException', function(err) 
 {
     Util.consoleLog('Caught exception: ' + err);
+    Util.consoleLog('Attempting to reconnect..');
+    Util.consoleLog('You should still try to restart me manually');
+
+    memory.serialize(function() 
+    {
+        try
+        {
+            memory.get("SELECT * FROM Debug ORDER BY time DESC LIMIT 1", function(err, row)
+            {
+                var tm = Config.customerID + Util.chooseRandom(Config.admins) + "@" + Config.chatServer;
+                var ts = Math.round(new Date().getTime() / 1000);
+
+                NedBot = new wobot.Bot(
+                {
+                    debug    : Config.debugXMPP,
+                    jid      : Config.userID + '@' + Config.chatServer + '/bot',
+                    password : Config.password,
+                    name     : Config.name
+                });
+
+                if(typeof row == "undefined")
+                {
+                    memory.run("INSERT INTO Debug(user, attempts, time) VALUES (?, ?, ?)", [tm, 1, ts]);
+                    NedBot.connect();
+
+                    NedBot.onConnect(function() 
+                    {
+                        this.message(tm, Config.imBrokenMessage);
+                        Util.consoleLog(Config.imBrokenMessage);
+                    });
+
+                    NedBot.disconnect();
+                }
+                else
+                {
+                    var usrid = row["id"];
+                    var attmp = row["attempts"];
+                    var time  = row["time"];
+
+                    if( (ts - time) > Config.imBrokenMsgFreq*60 )
+                    {
+                        var counter = attmp + 1;
+
+                        NedBot.connect();
+                        NedBot.onConnect(function() 
+                        {
+                            this.message(tm, Config.imBrokenMessage);
+                            Util.consoleLog(Config.imBrokenMessage);
+                        });
+
+                        memory.run("INSERT INTO Debug(user, attempts, time) VALUES (?, ?, ?)", [tm, counter, ts]);
+                        NedBot.disconnect();
+                    }
+                }
+            });
+        }
+        catch (err)
+        {
+            Util.consoleLog(err);
+        }
+    });
 });
 
