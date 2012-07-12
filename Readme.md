@@ -83,17 +83,17 @@ Place the plugin inside the `/plugins` directory and it will automatically be in
 
 
 ```js
-var plugin = {
-              name        : 'greet',                        // must be unique
-              trigger     : ['hi', 'hello'],                // prefix ned
-          //  trigger     : "([Nn]ed (hi|hello|yo).*)$",    // can also use regex
-              enabled     : 'true',                         // plugin can be inactive
-              fuzzy       : 'true',                         // autocorrect mispelled trigger
-              description : 'Greets a user',                // about the plugin
-              usage       : 'ned hi'                        // usage example
+var plugin = module.exports.plugin = 
+             {
+                name        : 'greet',                        // must be unique
+                trigger     : ['hi', 'hello'],                // prefix ned
+                // trigger  : "([Nn]ed (hi|hello|yo).*)$",    // can also use regex
+                enabled     : 'true',                         // plugin can be inactive
+                fuzzy       : 'true',                         // autocorrect mispelled trigger
+                description : 'Greets a user',                // about the plugin
+                usage       : 'ned hi'                        // usage example
              };
 
-module.exports.plugin = plugin;
 
 module.exports[plugin.name] = function(get)
 {
