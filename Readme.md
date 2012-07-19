@@ -52,7 +52,7 @@ $ npm install node-stringprep
 
 
 |    **Setting**     |                                   **Value**                                     |
-|:------------------:|:-------------------------------------------------------------------------------:|
+|:------------------:|:--------------------------------------------------------------------------------|
 |  *confServer*      |  Usually **`conf.hipchat.com`**                                                 |
 |  *chatServer*      |  Usually **`chat.hipchat.com`**                                                 |
 |  *userID*          |  The user id of the bot (generally **customerid_userid**)                       |
