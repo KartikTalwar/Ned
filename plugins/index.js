@@ -67,7 +67,7 @@ var onMessage = function(channel, frm, msg, x)
         }
         else
         {
-            var regex  = ned + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy|[Hh]ow) .*$";
+            var regex  = ned + "([Ww]ho|[Ww]hat|[Ww]hen|[Ww]here|[Ww]hy|[Hh]ow) .+$";
 
             if(parameters.fullMessage.match(regex) && parameters.fullMessage.replace(regex, '').length > 5)
             {
