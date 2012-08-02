@@ -1,4 +1,3 @@
-
 // cross-module globals
 Db      = require('sqlite3');
 Config  = require('./config');
@@ -24,7 +23,13 @@ Util.getFilesFromDir('plugins', function(err, files)
             var trigger = execute.plugin.trigger;
             var enabled = execute.plugin.enabled.toLowerCase();
             var fuzzy   = execute.plugin.fuzzy;
-            var details = { "name" : name, "trigger" : trigger, "fuzzy" : fuzzy, 'run' : execute[name] };
+
+            var details = {
+                            "name"    : name,
+                            "trigger" : trigger,
+                            "fuzzy"   : fuzzy,
+                            "run"     : execute[name]
+                          };
 
             if(enabled == 'true')
             {
