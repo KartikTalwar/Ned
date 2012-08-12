@@ -29,7 +29,7 @@ Because, Skynet was taken.
 
 **Downloading the files**
 
-```
+```sh
 $ git clone https://github.com/KartikTalwar/Ned.git
 $ cd Ned
 $ cp config.sample.js config.js
@@ -39,7 +39,7 @@ $ cp config.sample.js config.js
 
 This should be installed in the same folder such that a folder `Ned/node_modules` exists
 
-```
+```sh
 $ npm install wobot
 $ npm install request
 $ npm install sqlite3
