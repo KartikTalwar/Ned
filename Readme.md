@@ -1,7 +1,9 @@
 # Ned Bot - Artificial Artificial Intelligence for HipChat
 
 
-## About
+## About Ned
+
+### What is it?
 
 Ned is an XMPP bot, build on top of `wobot` that adds useful features like doing web searches, todo lists, weather information and much more to HipChat and allows you to have access to external data without the trouble of leaving your chat window.
 
@@ -9,6 +11,12 @@ Ned is an XMPP bot, build on top of `wobot` that adds useful features like doing
 ### Why is it called Ned?
 
 Because, Skynet was taken.
+
+
+### Why is this written in Node.js?
+*Like omg, nodejs is not even a real language..* 
+
+![Sending a message] (http://i45.tinypic.com/2h890ko.jpg)
 
 
 ## Installation
@@ -81,6 +89,7 @@ $ node server.js
 
 Place the plugin inside the `/plugins` directory and it will automatically be included
 
+**helloworld.js**
 
 ```js
 var plugin = module.exports.plugin = 
@@ -113,8 +122,7 @@ module.exports[plugin.name] = function(get)
 
 ## Authors
 
-- Kartik Talwar
-- Misha Nasleodov
+- [Kartik Talwar] (http://github.com/KartikTalwar)
 
 
 ## Legal Stuff
